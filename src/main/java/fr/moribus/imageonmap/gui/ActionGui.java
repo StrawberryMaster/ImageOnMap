@@ -30,7 +30,7 @@
 
 package fr.moribus.imageonmap.gui;
 
-import fr.moribus.imageonmap.ImageOnMap;
+import dev.tehbrian.imageonmap.ImageOnMap;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -205,9 +205,9 @@ public abstract class ActionGui extends InventoryGui {
                 action.callback.invoke(this);
             }
         } catch (IllegalAccessException | IllegalArgumentException ex) {
-            ImageOnMap.getPlugin().getLogger().log(Level.SEVERE, "Could not invoke GUI action handler", ex);
+            ImageOnMap.get().getLogger().log(Level.SEVERE, "Could not invoke GUI action handler", ex);
         } catch (InvocationTargetException ex) {
-            ImageOnMap.getPlugin().getLogger().log(Level.SEVERE,
+            ImageOnMap.get().getLogger().log(Level.SEVERE,
                     "Error while invoking action handler " + action.name + " of GUI " + guiClass.getName(),
                     ex.getCause());
         }

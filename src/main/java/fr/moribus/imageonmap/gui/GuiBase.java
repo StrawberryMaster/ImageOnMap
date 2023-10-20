@@ -30,7 +30,7 @@
 
 package fr.moribus.imageonmap.gui;
 
-import fr.moribus.imageonmap.ImageOnMap;
+import dev.tehbrian.imageonmap.ImageOnMap;
 import fr.moribus.imageonmap.i18n.I18n;
 import java.util.Locale;
 
@@ -128,7 +128,7 @@ public abstract class GuiBase {
             listener = getEventListener();
         }
         if (listener != null) {
-            Bukkit.getPluginManager().registerEvents(listener, ImageOnMap.getPlugin());
+            Bukkit.getPluginManager().registerEvents(listener, ImageOnMap.get());
         }
         open = true;
     }

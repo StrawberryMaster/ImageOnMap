@@ -36,7 +36,7 @@
 
 package fr.moribus.imageonmap.image;
 
-import fr.moribus.imageonmap.ImageOnMap;
+import dev.tehbrian.imageonmap.ImageOnMap;
 import java.awt.image.BufferedImage;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -72,7 +72,7 @@ public class Renderer extends MapRenderer {
     public static void installRenderer(BufferedImage image, int mapID) {
         MapView map = Bukkit.getMap(mapID);
         if (map == null) {
-            ImageOnMap.getPlugin().getLogger().warning("Could not install renderer for map " + mapID + ": the Minecraft map does not exist");
+            ImageOnMap.get().getLogger().warning("Could not install renderer for map " + mapID + ": the Minecraft map does not exist");
         } else {
             installRenderer(map).setImage(image);
         }

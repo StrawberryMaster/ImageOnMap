@@ -36,7 +36,7 @@
 
 package fr.moribus.imageonmap.ui;
 
-import fr.moribus.imageonmap.ImageOnMap;
+import dev.tehbrian.imageonmap.ImageOnMap;
 import fr.moribus.imageonmap.Permissions;
 import fr.moribus.imageonmap.i18n.I;
 import fr.moribus.imageonmap.map.ImageMap;
@@ -82,7 +82,7 @@ public class MapItemManager implements Listener {
 
     public static void init() {
         mapItemCache = new HashMap<>();
-        Bukkit.getPluginManager().registerEvents(new MapItemManager(), ImageOnMap.getPlugin());
+        Bukkit.getPluginManager().registerEvents(new MapItemManager(), ImageOnMap.get());
     }
 
     public static void exit() {

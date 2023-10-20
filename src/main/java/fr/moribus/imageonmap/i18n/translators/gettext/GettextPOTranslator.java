@@ -37,7 +37,7 @@
 
 package fr.moribus.imageonmap.i18n.translators.gettext;
 
-import fr.moribus.imageonmap.ImageOnMap;
+import dev.tehbrian.imageonmap.ImageOnMap;
 import fr.moribus.imageonmap.i18n.translators.Translation;
 import fr.moribus.imageonmap.i18n.translators.Translator;
 import java.io.File;
@@ -76,7 +76,7 @@ public class GettextPOTranslator extends Translator {
                 registerTranslation(translation);
             }
         } catch (POFile.CannotParsePOException | IOException e) {
-            ImageOnMap.getPlugin().getLogger().log(Level.SEVERE, "Cannot parse the " + getFilePath() + " translations file.", e);
+            ImageOnMap.get().getLogger().log(Level.SEVERE, "Cannot parse the " + getFilePath() + " translations file.", e);
             source = null;
         }
     }

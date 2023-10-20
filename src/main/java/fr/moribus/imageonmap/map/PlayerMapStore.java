@@ -36,7 +36,7 @@
 
 package fr.moribus.imageonmap.map;
 
-import fr.moribus.imageonmap.ImageOnMap;
+import dev.tehbrian.imageonmap.ImageOnMap;
 import fr.moribus.imageonmap.PluginConfiguration;
 import fr.moribus.imageonmap.map.MapManagerException.Reason;
 import java.io.IOException;
@@ -219,14 +219,14 @@ public class PlayerMapStore implements ConfigurationSerializable {
                     add_Map(newMap);
                 }
             } catch (InvalidConfigurationException ex) {
-                ImageOnMap.getPlugin().getLogger().log(Level.WARNING, "Could not load map data : ", ex);
+                ImageOnMap.get().getLogger().log(Level.WARNING, "Could not load map data : ", ex);
             }
         }
 
         try {
             checkMapLimit(0);
         } catch (MapManagerException ex) {
-            ImageOnMap.getPlugin().getLogger().log(Level.WARNING,
+            ImageOnMap.get().getLogger().log(Level.WARNING,
                     "Map limit exceeded for player " + playerUUID.toString() + " (" + mapList.size() + " maps loaded)");
         }
     }
@@ -241,7 +241,7 @@ public class PlayerMapStore implements ConfigurationSerializable {
 
     public void load() {
         if (mapsFile == null) {
-            mapsFile = ImageOnMap.getPlugin().getMapsDirectory().resolve(playerUUID.toString() + ".yml");
+            mapsFile = ImageOnMap.get().getMapsDirectory().resolve(playerUUID.toString() + ".yml");
             if (!Files.isRegularFile(mapsFile)) {
                 save();
             }
@@ -259,7 +259,7 @@ public class PlayerMapStore implements ConfigurationSerializable {
             getToolConfig().save(mapsFile.toFile());
 
         } catch (IOException ex) {
-            ImageOnMap.getPlugin().getLogger().log(Level.SEVERE, "Could not save maps file for player '" + playerUUID.toString() + "'", ex);
+            ImageOnMap.get().getLogger().log(Level.SEVERE, "Could not save maps file for player '" + playerUUID.toString() + "'", ex);
         }
     }
 }

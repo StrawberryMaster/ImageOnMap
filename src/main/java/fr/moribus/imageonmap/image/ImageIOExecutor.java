@@ -37,7 +37,7 @@
 package fr.moribus.imageonmap.image;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import fr.moribus.imageonmap.ImageOnMap;
+import dev.tehbrian.imageonmap.ImageOnMap;
 import fr.moribus.imageonmap.map.ImageMap;
 import fr.moribus.imageonmap.util.ExceptionCatcher;
 
@@ -88,20 +88,20 @@ public class ImageIOExecutor {
     }
 
     public static void saveImage(int mapID, BufferedImage image) {
-        saveImage(ImageOnMap.getPlugin().getImageFile(mapID), image);
+        saveImage(ImageOnMap.get().getImageFile(mapID), image);
     }
 
     public static void saveImage(int[] mapsIDs, PosterImage image) {
         for (int i = 0, c = mapsIDs.length; i < c; i++) {
             BufferedImage img = image.getImageAt(i);
-            ImageIOExecutor.saveImage(ImageOnMap.getPlugin().getImageFile(mapsIDs[i]), img);
+            ImageIOExecutor.saveImage(ImageOnMap.get().getImageFile(mapsIDs[i]), img);
             img.flush();//Safe to free
         }
     }
 
     public static void deleteImage(ImageMap map) {
         for (int mapsID : map.getMapsIDs()) {
-            deleteImage(ImageOnMap.getPlugin().getImageFile(mapsID));
+            deleteImage(ImageOnMap.get().getImageFile(mapsID));
         }
     }
 

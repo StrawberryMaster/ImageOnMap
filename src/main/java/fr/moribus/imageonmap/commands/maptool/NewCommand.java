@@ -36,7 +36,7 @@
 
 package fr.moribus.imageonmap.commands.maptool;
 
-import fr.moribus.imageonmap.ImageOnMap;
+import dev.tehbrian.imageonmap.ImageOnMap;
 import fr.moribus.imageonmap.Permissions;
 import fr.moribus.imageonmap.commands.IoMCommand;
 import fr.moribus.imageonmap.i18n.I;
@@ -101,7 +101,7 @@ public class NewCommand extends IoMCommand {
             ImageRendererExecutor.render(url, scaling, player.getUniqueId(), width, height)
                     .exceptionallyAsync((exception) -> {
                         player.sendMessage(I.t("{ce}Map rendering failed: {0}", exception.getMessage()));
-                        ImageOnMap.getPlugin().getLogger().warning("Rendering from " + player.getName() + " failed: "
+                        ImageOnMap.get().getLogger().warning("Rendering from " + player.getName() + " failed: "
                                 + exception.getClass().getCanonicalName() + ": " + exception.getMessage());
                         return null;
                     })

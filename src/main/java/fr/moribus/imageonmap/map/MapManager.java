@@ -36,7 +36,7 @@
 
 package fr.moribus.imageonmap.map;
 
-import fr.moribus.imageonmap.ImageOnMap;
+import dev.tehbrian.imageonmap.ImageOnMap;
 import fr.moribus.imageonmap.PluginConfiguration;
 import fr.moribus.imageonmap.image.ImageIOExecutor;
 import fr.moribus.imageonmap.image.PosterImage;
@@ -228,7 +228,7 @@ public abstract class MapManager {
 
     //Loading
     public static void load() {
-        try (var list = Files.list(ImageOnMap.getPlugin().getMapsDirectory())) {
+        try (var list = Files.list(ImageOnMap.get().getMapsDirectory())) {
             list.map(MapManager::getUUIDFromFile)
                     .filter(Objects::nonNull)
                     .forEach(MapManager::getPlayerMapStore);

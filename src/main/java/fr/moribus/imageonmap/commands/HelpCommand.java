@@ -30,7 +30,7 @@
 
 package fr.moribus.imageonmap.commands;
 
-import fr.moribus.imageonmap.ImageOnMap;
+import dev.tehbrian.imageonmap.ImageOnMap;
 import fr.moribus.imageonmap.gui.GuiUtils;
 import fr.zcraft.quartzlib.tools.commands.PaginatedTextView;
 import net.kyori.adventure.text.Component;
@@ -97,7 +97,7 @@ public class HelpCommand extends Command {
 
         String message = "\n";
         message += GuiUtils.generatePrefixedFixedLengthString("§6" + Commands.CHAT_PREFIX + "§l ",
-                ImageOnMap.getPlugin().getName() + " help for /" + command.getCommandGroup().getUsualName() + " "
+                ImageOnMap.get().getName() + " help for /" + command.getCommandGroup().getUsualName() + " "
                         + command.getName()) + "\n";
         message += GuiUtils.generatePrefixedFixedLengthString("§6" + Commands.CHAT_PREFIX + " ",
                 "Usage: §r" + command.getUsageString()) + "\n";
@@ -158,7 +158,7 @@ public class HelpCommand extends Command {
         @Override
         protected void displayHeader(CommandSender receiver) {
             final String header = ChatColor.BOLD + (commandGroup.getDescription().isEmpty()
-                    ? ImageOnMap.getPlugin().getName() + " help for /" + commandGroup.getUsualName()
+                    ? ImageOnMap.get().getName() + " help for /" + commandGroup.getUsualName()
                     : commandGroup.getDescription());
 
             receiver.sendMessage(receiver instanceof Player

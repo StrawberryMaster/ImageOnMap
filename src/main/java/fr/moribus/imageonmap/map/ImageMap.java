@@ -36,7 +36,7 @@
 
 package fr.moribus.imageonmap.map;
 
-import fr.moribus.imageonmap.ImageOnMap;
+import dev.tehbrian.imageonmap.ImageOnMap;
 import fr.moribus.imageonmap.i18n.I;
 import fr.moribus.imageonmap.ui.MapItemManager;
 
@@ -86,7 +86,7 @@ public abstract class ImageMap implements ConfigurationSerializable {
     }
 
     public static Path getFullImageFile(int mapIDstart, int mapIDend) {
-        return ImageOnMap.getPlugin().getImagesDirectory().resolve("_" + mapIDstart + "-" + mapIDend + ".png");
+        return ImageOnMap.get().getImagesDirectory().resolve("_" + mapIDstart + "-" + mapIDend + ".png");
     }
 
     public static ImageMap fromConfig(Map<String, Object> map, UUID userUUID) throws InvalidConfigurationException {

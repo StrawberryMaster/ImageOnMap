@@ -36,7 +36,7 @@
 
 package fr.moribus.imageonmap.gui;
 
-import fr.moribus.imageonmap.ImageOnMap;
+import dev.tehbrian.imageonmap.ImageOnMap;
 import fr.moribus.imageonmap.Permissions;
 import fr.moribus.imageonmap.i18n.I;
 import fr.moribus.imageonmap.map.ImageMap;
@@ -188,7 +188,7 @@ public class ConfirmDeleteMapGui extends ActionGui {
             MapManager.deleteMap(mapToDelete);
             getPlayer().sendMessage(I.t("{gray}Map successfully deleted."));
         } catch (MapManagerException ex) {
-            ImageOnMap.getPlugin().getLogger().log(Level.WARNING, "Error while deleting map", ex);
+            ImageOnMap.get().getLogger().log(Level.WARNING, "Error while deleting map", ex);
             getPlayer().sendMessage(ChatColor.RED + ex.getMessage());
         }
 

@@ -30,7 +30,7 @@
 
 package fr.moribus.imageonmap.i18n.translators.yaml;
 
-import fr.moribus.imageonmap.ImageOnMap;
+import dev.tehbrian.imageonmap.ImageOnMap;
 import fr.moribus.imageonmap.i18n.I;
 import fr.moribus.imageonmap.i18n.translators.Translation;
 import fr.moribus.imageonmap.i18n.translators.Translator;
@@ -98,7 +98,7 @@ public class YAMLTranslator extends Translator {
         final YamlConfiguration configuration = YamlConfiguration.loadConfiguration(getReader());
 
         if (configuration.getKeys(false).isEmpty()) {
-            ImageOnMap.getPlugin().getLogger().severe("Cannot load the " + getFilePath() + " translation file.");
+            ImageOnMap.get().getLogger().severe("Cannot load the " + getFilePath() + " translation file.");
             return;
         }
 

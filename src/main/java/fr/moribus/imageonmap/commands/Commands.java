@@ -30,7 +30,7 @@
 
 package fr.moribus.imageonmap.commands;
 
-import fr.moribus.imageonmap.ImageOnMap;
+import dev.tehbrian.imageonmap.ImageOnMap;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +50,7 @@ public class Commands {
         }
         CommandGroup newCommandGroup = new CommandGroup(group, commandClass, shortcutNames);
 
-        newCommandGroup.register(ImageOnMap.getPlugin());
+        newCommandGroup.register(ImageOnMap.get());
         commandGroups.add(newCommandGroup);
     }
 
@@ -62,7 +62,7 @@ public class Commands {
     @SuppressWarnings("unchecked")
     public static void register(String[] names, Class<? extends Command>... commandsClasses) {
         final CommandGroup commandGroup = new CommandGroup(names, commandsClasses);
-        commandGroup.register(ImageOnMap.getPlugin());
+        commandGroup.register(ImageOnMap.get());
 
         commandGroups.add(commandGroup);
     }

@@ -30,7 +30,7 @@
 
 package fr.moribus.imageonmap.i18n;
 
-import fr.moribus.imageonmap.ImageOnMap;
+import dev.tehbrian.imageonmap.ImageOnMap;
 import fr.moribus.imageonmap.i18n.translators.Translator;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -423,6 +423,6 @@ public class I18n {
             loadFromJar(jarFile, i18nDirectory);
         }
 
-        load(new File(ImageOnMap.getPlugin().getDataFolder(), i18nDirectory), 100);
+        load(new File(ImageOnMap.get().getDataFolder(), i18nDirectory), 100);
     }
 }

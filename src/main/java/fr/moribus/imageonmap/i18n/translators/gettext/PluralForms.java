@@ -37,7 +37,7 @@
 
 package fr.moribus.imageonmap.i18n.translators.gettext;
 
-import fr.moribus.imageonmap.ImageOnMap;
+import dev.tehbrian.imageonmap.ImageOnMap;
 import java.util.Locale;
 import java.util.function.Function;
 import java.util.logging.Level;
@@ -345,7 +345,7 @@ public class PluralForms {
                 return rawPluralIndex instanceof Boolean ? (((Boolean) rawPluralIndex) ? 1 : 0) :
                         (rawPluralIndex instanceof Number ? ((Number) rawPluralIndex).intValue() : Integer.parseInt(rawPluralIndex.toString()));
             } catch (ScriptException | NumberFormatException e) {
-                ImageOnMap.getPlugin().getLogger().log(Level.SEVERE, "Invalid plural forms script “" + formsScript + "”", e);
+                ImageOnMap.get().getLogger().log(Level.SEVERE, "Invalid plural forms script “" + formsScript + "”", e);
                 return 0;
             }
         };
@@ -357,7 +357,7 @@ public class PluralForms {
      * @return a Function to compute the plural index from the given count.
      */
     private Function<Long, Integer> formsFunctionFallback() {
-        ImageOnMap.getPlugin().getLogger().warning(
+        ImageOnMap.get().getLogger().warning(
                 "Unknown plural rule “" + formsScript + "”; without JavaScript engine available, we'll fallback to English "
                         + "pluralization rules. If you want your language's plural rules supported without JavaScript "
                         + "engine, please open an issue with your language and its plural rules at "

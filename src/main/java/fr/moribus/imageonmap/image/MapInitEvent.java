@@ -36,7 +36,7 @@
 
 package fr.moribus.imageonmap.image;
 
-import fr.moribus.imageonmap.ImageOnMap;
+import dev.tehbrian.imageonmap.ImageOnMap;
 import fr.moribus.imageonmap.map.MapManager;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -58,7 +58,7 @@ import org.bukkit.map.MapView;
 
 public class MapInitEvent implements Listener {
     public static void init() {
-        Bukkit.getPluginManager().registerEvents(new MapInitEvent(), ImageOnMap.getPlugin());
+        Bukkit.getPluginManager().registerEvents(new MapInitEvent(), ImageOnMap.get());
 
         for (World world : Bukkit.getWorlds()) {
             for (ItemFrame frame : world.getEntitiesByClass(ItemFrame.class)) {
@@ -89,7 +89,7 @@ public class MapInitEvent implements Listener {
             return;
         }
 
-        Path imageFile = ImageOnMap.getPlugin().getImageFile(map.getId());
+        Path imageFile = ImageOnMap.get().getImageFile(map.getId());
         if (Files.isRegularFile(imageFile)) {
             ImageIOExecutor.loadImage(imageFile, Renderer.installRenderer(map));
         }

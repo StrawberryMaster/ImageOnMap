@@ -36,7 +36,7 @@
 
 package fr.moribus.imageonmap.commands.maptool;
 
-import fr.moribus.imageonmap.ImageOnMap;
+import dev.tehbrian.imageonmap.ImageOnMap;
 import fr.moribus.imageonmap.Permissions;
 import fr.moribus.imageonmap.commands.IoMCommand;
 import fr.moribus.imageonmap.map.ImageMap;
@@ -122,7 +122,7 @@ public class DeleteCommand extends IoMCommand {
                     MapManager.deleteMap(map);
                     success(sender, I.t("Map successfully deleted."));
                 } catch (MapManagerException ex) {
-                    ImageOnMap.getPlugin().getLogger().warning(I.t("A non-existent map was requested to be deleted", ex));
+                    ImageOnMap.get().getLogger().warning(I.t("A non-existent map was requested to be deleted", ex));
                     warning(sender, I.t("This map does not exist."));
                 }
             }

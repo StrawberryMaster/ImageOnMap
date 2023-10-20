@@ -30,7 +30,7 @@
 
 package fr.moribus.imageonmap.commands;
 
-import fr.moribus.imageonmap.ImageOnMap;
+import dev.tehbrian.imageonmap.ImageOnMap;
 import fr.moribus.imageonmap.commands.CommandException.Reason;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -238,7 +238,7 @@ public abstract class Command {
      * @return {@code true} if the sender can execute the command.
      */
     public boolean canExecute(CommandSender sender) {
-        String permissionPrefix = ImageOnMap.getPlugin().getName().toLowerCase() + ".";
+        String permissionPrefix = ImageOnMap.get().getName().toLowerCase() + ".";
         return sender.hasPermission(permissionPrefix + commandGroup.getUsualName());
     }
 

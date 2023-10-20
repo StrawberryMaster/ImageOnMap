@@ -39,13 +39,14 @@ package fr.moribus.imageonmap;
 import java.util.Locale;
 import java.util.function.Supplier;
 
+import dev.tehbrian.imageonmap.ImageOnMap;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import fr.moribus.imageonmap.i18n.I18n;
 
 public final class PluginConfiguration {
 
-    private static final ImageOnMap PLUGIN = ImageOnMap.getPlugin();
+    private static final ImageOnMap PLUGIN = ImageOnMap.get();
 
     public static final Supplier<Locale> LANG = () -> I18n.localeFromString(PLUGIN.getConfig().getString("lang", "en-US"));
 

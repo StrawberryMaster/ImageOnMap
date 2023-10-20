@@ -37,7 +37,7 @@
 package fr.moribus.imageonmap.image;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import fr.moribus.imageonmap.ImageOnMap;
+import dev.tehbrian.imageonmap.ImageOnMap;
 import fr.moribus.imageonmap.Permissions;
 import fr.moribus.imageonmap.PluginConfiguration;
 import fr.moribus.imageonmap.i18n.I;
@@ -69,7 +69,7 @@ public class ImageRendererExecutor {
     );
 
     public static Executor getMainThread() {
-        return Bukkit.getScheduler().getMainThreadExecutor(ImageOnMap.getPlugin());
+        return Bukkit.getScheduler().getMainThreadExecutor(ImageOnMap.get());
     }
 
     @FunctionalInterface

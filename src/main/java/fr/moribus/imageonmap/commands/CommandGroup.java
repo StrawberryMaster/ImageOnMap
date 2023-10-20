@@ -30,7 +30,7 @@
 
 package fr.moribus.imageonmap.commands;
 
-import fr.moribus.imageonmap.ImageOnMap;
+import dev.tehbrian.imageonmap.ImageOnMap;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
@@ -89,7 +89,7 @@ public class CommandGroup implements TabCompleter, CommandExecutor {
         String fileName = "help/" + getUsualName() + ".txt";
         InputStream stream = getClass().getClassLoader().getResourceAsStream(fileName);
         if (stream == null) {
-            ImageOnMap.getPlugin().getLogger().warning("Could not load description file for the " + getUsualName() + " command");
+            ImageOnMap.get().getLogger().warning("Could not load description file for the " + getUsualName() + " command");
             return;
         }
 
@@ -143,7 +143,7 @@ public class CommandGroup implements TabCompleter, CommandExecutor {
             newCommand.init(isShortcutCommand() ? shortcutCommandGroup : this);
             commands.add(newCommand);
         } catch (Exception ex) {
-            ImageOnMap.getPlugin().getLogger().log(Level.WARNING, "Exception while initializing command", ex);
+            ImageOnMap.get().getLogger().log(Level.WARNING, "Exception while initializing command", ex);
         }
     }
 
