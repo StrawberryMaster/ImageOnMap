@@ -67,7 +67,7 @@ public class GiveCommand extends IoMCommand {
             throwInvalidArgument(I.t("Too many parameters!"));
             return;
         }
-        if (arguments.size() < 1) {
+        if (arguments.isEmpty()) {
             throwInvalidArgument(I.t("Too few parameters!"));
             return;
         }

@@ -117,7 +117,6 @@ public abstract class MapManager {
      * @param item The item stack
      * @return The map ID, or 0 if invalid.
      */
-    @SuppressWarnings("deprecation")
     public static int getMapIdFromItemStack(final ItemStack item) {
         final ItemMeta meta = item.getItemMeta();
         if (!(meta instanceof MapMeta)) {

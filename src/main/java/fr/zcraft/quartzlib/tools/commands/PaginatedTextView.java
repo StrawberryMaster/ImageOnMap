@@ -43,7 +43,7 @@ import org.bukkit.entity.Player;
 
 
 /**
- * An utility to send paginated chat views to players, mainly for commands.
+ * A utility to send paginated chat views to players, mainly for commands.
  *
  * @param <T> Data type to display.
  */

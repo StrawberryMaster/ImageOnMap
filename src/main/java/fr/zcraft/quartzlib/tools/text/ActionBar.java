@@ -42,7 +42,7 @@ import org.bukkit.scheduler.BukkitTask;
 
 
 /**
- * An utility class to send action bar messages to the players.
+ * A utility class to send action bar messages to the players.
  */
 public final class ActionBar {
     private static final Map<UUID, String> actionMessages = new ConcurrentHashMap<>();

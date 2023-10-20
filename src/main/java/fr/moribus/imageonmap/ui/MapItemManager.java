@@ -170,7 +170,6 @@ public class MapItemManager implements Listener {
      * @param originalMap original map item containing minecraft map id.
      * @return new map part item
      */
-    @SuppressWarnings("deprecation")
     public static ItemStack createMapItem(ItemStack originalMap) {
         ItemMeta meta = originalMap.getItemMeta();
         if (meta instanceof MapMeta && ((MapMeta) meta).hasMapId()) {

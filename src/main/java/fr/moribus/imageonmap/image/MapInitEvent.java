@@ -77,7 +77,6 @@ public class MapInitEvent implements Listener {
         }
     }
 
-    @SuppressWarnings("deprecation")
     public static void initMap(int id) {
         initMap(Bukkit.getServer().getMap(id));
     }

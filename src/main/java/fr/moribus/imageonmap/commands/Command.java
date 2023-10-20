@@ -139,7 +139,7 @@ public abstract class Command {
      * @return {@code true} if this flag is valid.
      */
     private static boolean isValidFlag(Set<String> acceptedFlags, String flag) {
-        return acceptedFlags != null && (acceptedFlags.size() == 0 || acceptedFlags.contains(flag.toLowerCase()));
+        return acceptedFlags != null && (acceptedFlags.isEmpty() || acceptedFlags.contains(flag.toLowerCase()));
     }
 
     /**

@@ -213,7 +213,7 @@ public abstract class Translator {
         }
 
         Translation translation = contextMap.get(messageId);
-        if (translation == null || translation.translations().size() == 0) {
+        if (translation == null || translation.translations().isEmpty()) {
             return null;
         }
 

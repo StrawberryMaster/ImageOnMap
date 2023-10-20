@@ -159,7 +159,7 @@ public abstract class GuiBase {
     }
 
     /**
-     * Gets he player this Gui instance is associated to.
+     * Gets the player this Gui instance is associated to.
      * @return The player this Gui instance is associated to.
      */
     protected final Player getPlayer() {

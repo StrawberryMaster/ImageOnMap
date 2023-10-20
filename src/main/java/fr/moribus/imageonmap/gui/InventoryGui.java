@@ -150,7 +150,7 @@ public abstract class InventoryGui extends GuiBase {
     protected abstract void onClick(final InventoryClickEvent event);
 
     /**
-     * Raised when an drag is performed on the inventory.
+     * Raised when a drag is performed on the inventory.
      * The default behaviour is to cancel any event that affects the GUI.
      *
      * @param event The drag event data.

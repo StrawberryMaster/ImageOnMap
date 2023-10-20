@@ -69,7 +69,6 @@ public class Renderer extends MapRenderer {
         }
     }
 
-    @SuppressWarnings("deprecation")
     public static void installRenderer(BufferedImage image, int mapID) {
         MapView map = Bukkit.getMap(mapID);
         if (map == null) {

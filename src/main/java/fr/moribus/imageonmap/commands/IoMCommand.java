@@ -99,7 +99,7 @@ public abstract class IoMCommand extends Command {
                 }
             }
 
-            if (s.length() > 0 && state != 1) {
+            if (!s.isEmpty() && state != 1) {
                 arguments.add(s.toString());
             }
         }
