@@ -37,7 +37,7 @@
 package fr.moribus.imageonmap.ui;
 
 import dev.tehbrian.imageonmap.ImageOnMap;
-import fr.moribus.imageonmap.Permissions;
+import dev.tehbrian.imageonmap.Permission;
 import fr.moribus.imageonmap.i18n.I;
 import fr.moribus.imageonmap.map.ImageMap;
 import fr.moribus.imageonmap.map.MapManager;
@@ -242,7 +242,7 @@ public class MapItemManager implements Listener {
             return;
         }
 
-        if (!Permissions.PLACE_SPLATTER_MAP.grantedTo(player)) {
+        if (!Permission.PLACE_SPLATTER_MAP.grantedTo(player)) {
             player.sendMessage(I.t(ChatColor.RED + "You do not have permission to place splatter maps."));
             event.setCancelled(true);
             return;
@@ -295,7 +295,7 @@ public class MapItemManager implements Listener {
         }
 
         if (map instanceof PosterMap && player != null) {
-            if (!Permissions.REMOVE_SPLATTER_MAP.grantedTo(player)) {
+            if (!Permission.REMOVE_SPLATTER_MAP.grantedTo(player)) {
                 event.setCancelled(true);
                 return;
             }

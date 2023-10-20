@@ -54,7 +54,7 @@
 
 package fr.moribus.imageonmap.commands.maptool;
 
-import fr.moribus.imageonmap.Permissions;
+import dev.tehbrian.imageonmap.Permission;
 import fr.moribus.imageonmap.commands.IoMCommand;
 import fr.moribus.imageonmap.i18n.I;
 import fr.moribus.imageonmap.map.ImageMap;
@@ -98,6 +98,6 @@ public class RenameCommand extends IoMCommand {
 
     @Override
     public boolean canExecute(CommandSender sender) {
-        return Permissions.RENAME.grantedTo(sender);
+        return Permission.RENAME.grantedTo(sender);
     }
 }

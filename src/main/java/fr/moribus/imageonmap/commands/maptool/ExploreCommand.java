@@ -37,7 +37,7 @@
 package fr.moribus.imageonmap.commands.maptool;
 
 
-import fr.moribus.imageonmap.Permissions;
+import dev.tehbrian.imageonmap.Permission;
 import fr.moribus.imageonmap.commands.IoMCommand;
 import fr.moribus.imageonmap.gui.MapListGui;
 import fr.moribus.imageonmap.i18n.I;
@@ -65,7 +65,7 @@ public class ExploreCommand extends IoMCommand {
 
         final Player sender = playerSender();
         if (arguments.size() == 1) {
-            if (!Permissions.LISTOTHER.grantedTo(sender)) {
+            if (!Permission.LISTOTHER.grantedTo(sender)) {
                 throwNotAuthorized();
                 return;
             }
@@ -87,6 +87,6 @@ public class ExploreCommand extends IoMCommand {
 
     @Override
     public boolean canExecute(CommandSender sender) {
-        return Permissions.LIST.grantedTo(sender);
+        return Permission.LIST.grantedTo(sender);
     }
 }

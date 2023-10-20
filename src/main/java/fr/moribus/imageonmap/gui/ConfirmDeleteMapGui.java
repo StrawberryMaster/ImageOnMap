@@ -37,7 +37,7 @@
 package fr.moribus.imageonmap.gui;
 
 import dev.tehbrian.imageonmap.ImageOnMap;
-import fr.moribus.imageonmap.Permissions;
+import dev.tehbrian.imageonmap.Permission;
 import fr.moribus.imageonmap.i18n.I;
 import fr.moribus.imageonmap.map.ImageMap;
 import fr.moribus.imageonmap.map.MapManager;
@@ -176,7 +176,7 @@ public class ConfirmDeleteMapGui extends ActionGui {
     protected void delete() {
 
         // Does the player still have the permission to delete a map?
-        if (!Permissions.DELETE.grantedTo(getPlayer())) {
+        if (!Permission.DELETE.grantedTo(getPlayer())) {
             I.sendT(getPlayer(), "{ce}You are no longer allowed to do that.");
             close();
             return;

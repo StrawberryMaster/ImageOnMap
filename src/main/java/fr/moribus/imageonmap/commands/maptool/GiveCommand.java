@@ -36,7 +36,7 @@
 
 package fr.moribus.imageonmap.commands.maptool;
 
-import fr.moribus.imageonmap.Permissions;
+import dev.tehbrian.imageonmap.Permission;
 import fr.moribus.imageonmap.commands.IoMCommand;
 import fr.moribus.imageonmap.i18n.I;
 import fr.moribus.imageonmap.map.ImageMap;
@@ -124,6 +124,6 @@ public class GiveCommand extends IoMCommand {
 
     @Override
     public boolean canExecute(CommandSender sender) {
-        return Permissions.GIVE.grantedTo(sender);
+        return Permission.GIVE.grantedTo(sender);
     }
 }

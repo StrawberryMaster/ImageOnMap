@@ -37,7 +37,7 @@
 package fr.moribus.imageonmap.gui;
 
 import dev.tehbrian.imageonmap.ImageOnMap;
-import fr.moribus.imageonmap.Permissions;
+import dev.tehbrian.imageonmap.Permission;
 import fr.moribus.imageonmap.i18n.I;
 import fr.moribus.imageonmap.map.ImageMap;
 import fr.moribus.imageonmap.map.PosterMap;
@@ -84,7 +84,7 @@ public class MapDetailGui extends ExplorerGui<Integer> {
                 I.t(getPlayerLocale(), "{gray}Column: {white}{0}", x + 1)
         ));
 
-        if (Permissions.GET.grantedTo(getPlayer())) {
+        if (Permission.GET.grantedTo(getPlayer())) {
             lore.add("");
             lore.add(I.t(getPlayerLocale(), "{gray}» {white}Click{gray} to get only this part"));
         }
@@ -107,7 +107,7 @@ public class MapDetailGui extends ExplorerGui<Integer> {
                 I.t(getPlayerLocale(), "{gray}Part: {white}{0}", index + 1)
         ));
 
-        if (Permissions.GET.grantedTo(getPlayer())) {
+        if (Permission.GET.grantedTo(getPlayer())) {
             lore.add("");
             lore.add(I.t(getPlayerLocale(), "{gray}» {white}Click{gray} to get only this part"));
         }
@@ -119,7 +119,7 @@ public class MapDetailGui extends ExplorerGui<Integer> {
 
     @Override
     protected ItemStack getPickedUpItem(int x, int y) {
-        if (!Permissions.GET.grantedTo(getPlayer())) {
+        if (!Permission.GET.grantedTo(getPlayer())) {
             return null;
         }
 
@@ -134,7 +134,7 @@ public class MapDetailGui extends ExplorerGui<Integer> {
 
     @Override
     protected ItemStack getPickedUpItem(Integer mapId) {
-        if (!Permissions.GET.grantedTo(getPlayer())) {
+        if (!Permission.GET.grantedTo(getPlayer())) {
             return null;
         }
 
@@ -172,8 +172,8 @@ public class MapDetailGui extends ExplorerGui<Integer> {
             setDataShape(1, 1);
         }
 
-        final boolean canRename = Permissions.RENAME.grantedTo(getPlayer());
-        final boolean canDelete = Permissions.DELETE.grantedTo(getPlayer());
+        final boolean canRename = Permission.RENAME.grantedTo(getPlayer());
+        final boolean canDelete = Permission.DELETE.grantedTo(getPlayer());
 
         int renameSlot = getSize() - 7;
         int deleteSlot = getSize() - 6;
@@ -227,7 +227,7 @@ public class MapDetailGui extends ExplorerGui<Integer> {
 
     @GuiAction("rename")
     public void rename() {
-        if (!Permissions.RENAME.grantedTo(getPlayer())) {
+        if (!Permission.RENAME.grantedTo(getPlayer())) {
             I.sendT(getPlayer(), "{ce}You are no longer allowed to do that.");
             update();
             return;
@@ -239,7 +239,7 @@ public class MapDetailGui extends ExplorerGui<Integer> {
 
             @Override
             public @Nullable Prompt acceptInput(@NotNull ConversationContext context, @Nullable String input) {
-                if (!Permissions.RENAME.grantedTo(getPlayer())) {
+                if (!Permission.RENAME.grantedTo(getPlayer())) {
                     I.sendT(getPlayer(), "{ce}You are no longer allowed to do that.");
                     return END_OF_CONVERSATION;
                 }
@@ -278,7 +278,7 @@ public class MapDetailGui extends ExplorerGui<Integer> {
 
     @GuiAction("delete")
     public void delete() {
-        if (!Permissions.DELETE.grantedTo(getPlayer())) {
+        if (!Permission.DELETE.grantedTo(getPlayer())) {
             I.sendT(getPlayer(), "{ce}You are no longer allowed to do that.");
             update();
             return;

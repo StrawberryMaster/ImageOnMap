@@ -37,7 +37,7 @@
 package fr.moribus.imageonmap.commands.maptool;
 
 import dev.tehbrian.imageonmap.ImageOnMap;
-import fr.moribus.imageonmap.Permissions;
+import dev.tehbrian.imageonmap.Permission;
 import fr.moribus.imageonmap.commands.IoMCommand;
 import fr.moribus.imageonmap.map.ImageMap;
 import fr.moribus.imageonmap.map.MapManager;
@@ -91,7 +91,7 @@ public class DeleteCommand extends IoMCommand {
         final String mapName;
         final Player sender = playerSender();
         if (arguments.size() == 2 || arguments.size() == 3) {
-            if (!Permissions.DELETEOTHER.grantedTo(sender)) {
+            if (!Permission.DELETEOTHER.grantedTo(sender)) {
                 throwNotAuthorized();
                 return;
             }
@@ -142,6 +142,6 @@ public class DeleteCommand extends IoMCommand {
 
     @Override
     public boolean canExecute(CommandSender sender) {
-        return Permissions.DELETE.grantedTo(sender);
+        return Permission.DELETE.grantedTo(sender);
     }
 }

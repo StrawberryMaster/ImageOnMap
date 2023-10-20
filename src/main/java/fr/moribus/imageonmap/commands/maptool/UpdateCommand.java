@@ -37,7 +37,7 @@
 package fr.moribus.imageonmap.commands.maptool;
 
 import dev.tehbrian.imageonmap.ImageOnMap;
-import fr.moribus.imageonmap.Permissions;
+import dev.tehbrian.imageonmap.Permission;
 import fr.moribus.imageonmap.commands.IoMCommand;
 import fr.moribus.imageonmap.i18n.I;
 import fr.moribus.imageonmap.image.ImageRendererExecutor;
@@ -106,7 +106,7 @@ public class UpdateCommand extends IoMCommand {
             url = arguments.get(1);
         } else {
             if (arguments.size() == 4) {
-                if (!Permissions.UPDATEOTHER.grantedTo(sender)) {
+                if (!Permission.UPDATEOTHER.grantedTo(sender)) {
                     throwNotAuthorized();
                     return;
                 }
@@ -122,7 +122,7 @@ public class UpdateCommand extends IoMCommand {
                         url = arguments.get(1);
                         resize = arguments.get(2);
                     } else {
-                        if (!Permissions.UPDATEOTHER.grantedTo(sender)) {
+                        if (!Permission.UPDATEOTHER.grantedTo(sender)) {
                             throwNotAuthorized();
                             return;
                         }
@@ -217,6 +217,6 @@ public class UpdateCommand extends IoMCommand {
 
     @Override
     public boolean canExecute(CommandSender sender) {
-        return Permissions.UPDATE.grantedTo(sender);
+        return Permission.UPDATE.grantedTo(sender);
     }
 }

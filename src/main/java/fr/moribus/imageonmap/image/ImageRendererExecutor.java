@@ -38,7 +38,7 @@ package fr.moribus.imageonmap.image;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import dev.tehbrian.imageonmap.ImageOnMap;
-import fr.moribus.imageonmap.Permissions;
+import dev.tehbrian.imageonmap.Permission;
 import fr.moribus.imageonmap.PluginConfiguration;
 import fr.moribus.imageonmap.i18n.I;
 import fr.moribus.imageonmap.map.ImageMap;
@@ -91,7 +91,7 @@ public class ImageRendererExecutor {
         var player = Bukkit.getPlayer(playerUUID);
 
         if ((PluginConfiguration.LIMIT_SIZE_X.get() > 0 || PluginConfiguration.LIMIT_SIZE_Y.get() > 0)
-                && !(player != null && Permissions.BYPASS_SIZE.grantedTo(player))) {
+                && !(player != null && Permission.BYPASS_SIZE.grantedTo(player))) {
             if (PluginConfiguration.LIMIT_SIZE_X.get() > 0
                     && image.getWidth() > PluginConfiguration.LIMIT_SIZE_X.get()) {
                 throw new IOException(I.t("The image is too wide!"));

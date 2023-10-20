@@ -36,7 +36,7 @@
 
 package fr.moribus.imageonmap.gui;
 
-import fr.moribus.imageonmap.Permissions;
+import dev.tehbrian.imageonmap.Permission;
 import fr.moribus.imageonmap.PluginConfiguration;
 import fr.moribus.imageonmap.i18n.I;
 import fr.moribus.imageonmap.map.ImageMap;
@@ -96,7 +96,7 @@ public class MapListGui extends ExplorerGui<ImageMap> {
                 I.tl(getPlayerLocale(), "{gray}Map ID: {0}", map.getId()),
                 ""
         ));
-        if (Permissions.GET.grantedTo(getPlayer())) {
+        if (Permission.GET.grantedTo(getPlayer())) {
             lore.add(I.tl(getPlayerLocale(), "{gray}» {white}Left-click{gray} to get this map"));
         }
         lore.add(I.tl(getPlayerLocale(), "{gray}» {white}Right-click{gray} for details and options"));
@@ -117,7 +117,7 @@ public class MapListGui extends ExplorerGui<ImageMap> {
             meta.setDisplayName(I.tl(getPlayerLocale(), "{red}You don't have any map."));
 
             List<String> lore = new ArrayList<>();
-            if (Permissions.NEW.grantedTo(getPlayer())) {
+            if (Permission.NEW.grantedTo(getPlayer())) {
                 lore.addAll(GuiUtils.generateLore(I.tl(getPlayerLocale(),
                         "{gray}Get started by creating a new one using {white}/tomap <URL> [resize]{gray}!")));
             } else {
@@ -142,7 +142,7 @@ public class MapListGui extends ExplorerGui<ImageMap> {
 
     @Override
     protected ItemStack getPickedUpItem(ImageMap map) {
-        if (!Permissions.GET.grantedTo(getPlayer())) {
+        if (!Permission.GET.grantedTo(getPlayer())) {
             return null;
         }
 
