@@ -1,24 +1,25 @@
-name: ImageOnMap
-main: fr.moribus.imageonmap.ImageOnMap
+name: "ImageOnMap"
+main: "dev.tehbrian.imageonmap.ImageOnMap"
 version: "${project.version}"
 api-version: "1.20"
 
-
 commands:
   tomap:
-    description: render an image in a map
-    usage: /<command> [URL]
+    description: Render an image onto a map.
+    usage: /<command> [url]
   maptool:
-    description: Manage maps
+    description: Manage your maps.
+    usage: /<command>
   maps:
-    description: Manage maps through a GUI
+    description: See your maps.
+    usage: /<command>
   givemap:
-    description: give a map to a player from a player map store, by default take from the player that make the command
+    description: Give to a player a map from another player's map store.
     usage: /<command> [player_from] player_to map_name
 
 permissions:
   imageonmap.*:
-    description: "Grants all the user permissions (excluding administrative ones)."
+    description: "Grants all non-administrative permissions."
     default: true
     children:
       imageonmap.userender: true
@@ -39,74 +40,70 @@ permissions:
       imageonmap.update: true
       imageonmap.updateother: false
 
-  imageonmap.userender:
-    description: "Allows you to use /tomap and related commands (/maptool getremaining). Alias of imageonmap.new."
+  imageonmap.new:
+    description: "Permission to use /tomap and related commands."
     default: true
 
-  imageonmap.new:
-    description: "Allows you to use /tomap and related commands (/maptool getremaining)."
+  imageonmap.rename:
+    description: "Permission to rename a map."
     default: true
 
   imageonmap.list:
-    description: "Allows you to list the images you rendered."
+    description: "Permission to list your rendered maps."
     default: true
 
   imageonmap.listother:
-    description: "Allows you to list the images a player have rendered."
+    description: "Permission to list another player's rendered maps."
     default: op
 
   imageonmap.get:
-    description: "Allows you to get a new map among the ones you already rendered, and related commands (/maptool getremaining)."
+    description: "Permission to retrieve a map from your rendered maps."
     default: true
 
   imageonmap.getother:
-    description: "Allows you to get a new map among the ones a player have already rendered."
+    description: "Permission to retrieve a map from another player's rendered maps."
     default: op
 
   imageonmap.explore:
-    description: "Allows you to open a GUI with all your maps."
+    description: "Permission to list your maps in a GUI."
     default: true
 
   imageonmap.exploreother:
-    description: "Allows you to open a GUI with all of the player maps."
+    description: "Permission to list another player's maps in a GUI."
     default: op
-
-  imageonmap.rename:
-    description: "Allows you to rename a map you rendered in the past."
-    default: true
 
   imageonmap.delete:
-    description: "Allows you to delete a map you rendered in the past."
+    description: "Permission to delete a map."
     default: true
-
-  imageonmap.give:
-    description: "Allows you to give a map to a specified player."
-    default: op
 
   imageonmap.deleteother:
-    description: "Allows you to delete a map a player rendered in the past."
-    default: op
-
-  imageonmap.placesplattermap:
-    description: "Allows you to place a splatter map."
-    default: true
-
-  imageonmap.removesplattermap:
-    description: "Allows you to remove a splatter map from a wall by sneaking and breaking a map."
-    default: true
-
-  imageonmap.administrative:
-    description: "Allows you to perform administrative tasks (like /maptool migrate)."
-    default: op
-
-  imageonmap.bypasssize:
-    description: "Allows you to create maps larger than the configured limit."
+    description: "Permission to delete another player's map."
     default: op
 
   imageonmap.update:
-    description: "Allows you to update an existing map with a new image."
+    description: "Permission to render a new image onto your old map."
     default: true
 
   imageonmap.updateother:
-    description: "Allows you to update an existing map of an other player with a new image."
+    description: "Permission to render a new image onto another player's old map."
+    default: op
+
+  imageonmap.give:
+    description: "Permission to give a map to a specified player."
+    default: op
+
+  imageonmap.placesplattermap:
+    description: "Permission to place a splatter map."
+    default: true
+
+  imageonmap.removesplattermap:
+    description: "Permission to remove a splatter map when sneaking."
+    default: true
+
+  imageonmap.administrative:
+    description: "Permission to perform administrative tasks, such as /maptool migrate."
+    default: op
+
+  imageonmap.bypasssize:
+    description: "Permission to create maps larger than the configured limit."
     default: op
