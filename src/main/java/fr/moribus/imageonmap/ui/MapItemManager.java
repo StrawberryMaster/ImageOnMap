@@ -43,8 +43,8 @@ import fr.moribus.imageonmap.map.ImageMap;
 import fr.moribus.imageonmap.map.MapManager;
 import fr.moribus.imageonmap.map.PosterMap;
 import fr.moribus.imageonmap.map.SingleMap;
-import fr.zcraft.quartzlib.tools.items.ItemUtils;
-import fr.zcraft.quartzlib.tools.runners.RunTask;
+import dev.tehbrian.imageonmap.util.ItemUtil;
+import dev.tehbrian.imageonmap.util.RunTask;
 import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.Queue;
@@ -113,7 +113,7 @@ public class MapItemManager implements Listener {
     }
 
     private static boolean give(final Player player, final ItemStack item) {
-        boolean given = ItemUtils.give(player, item);
+        boolean given = ItemUtil.give(player, item);
 
         if (given) {
             player.playSound(player.getLocation(), Sound.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 1, 1);
@@ -284,7 +284,7 @@ public class MapItemManager implements Listener {
             }
         }
 
-        ItemUtils.consumeItem(player, mapItem);
+        ItemUtil.consumeItem(player, mapItem);
     }
 
     private static void onItemFrameRemove(ItemFrame frame, @Nullable Player player, Cancellable event) {

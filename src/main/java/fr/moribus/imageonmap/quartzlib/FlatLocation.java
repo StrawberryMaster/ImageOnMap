@@ -28,7 +28,7 @@
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
 
-package fr.zcraft.quartzlib.tools.world;
+package fr.moribus.imageonmap.quartzlib;
 
 import org.bukkit.Location;
 import org.bukkit.World;

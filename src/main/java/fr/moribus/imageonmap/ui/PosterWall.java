@@ -37,8 +37,8 @@
 package fr.moribus.imageonmap.ui;
 
 import fr.moribus.imageonmap.map.PosterMap;
-import fr.zcraft.quartzlib.tools.world.FlatLocation;
-import fr.zcraft.quartzlib.tools.world.WorldUtils;
+import fr.moribus.imageonmap.quartzlib.FlatLocation;
+import dev.tehbrian.imageonmap.util.WorldUtil;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
@@ -89,7 +89,7 @@ public class PosterWall {
             if (!(entity instanceof ItemFrame frame)) {
                 continue;
             }
-            if (WorldUtils.differentLocation(location, entity.getLocation())) {
+            if (WorldUtil.pointToSameBlock(location, entity.getLocation())) {
                 continue;
             }
             if (frame.getFacing() != location.getFacing()) {
@@ -115,7 +115,7 @@ public class PosterWall {
             if (!(entity instanceof ItemFrame frame)) {
                 continue;
             }
-            if (WorldUtils.differentLocation(location, entity.getLocation())) {
+            if (WorldUtil.pointToSameBlock(location, entity.getLocation())) {
                 continue;
             }
             if (frame.getFacing() != facing) {

@@ -46,7 +46,7 @@ import fr.moribus.imageonmap.map.ImageMap;
 import fr.moribus.imageonmap.map.MapManager;
 import fr.moribus.imageonmap.commands.CommandException;
 import fr.moribus.imageonmap.commands.CommandInfo;
-import fr.zcraft.quartzlib.tools.text.ActionBar;
+import dev.tehbrian.imageonmap.util.ActionBar;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -177,7 +177,7 @@ public class UpdateCommand extends IoMCommand {
                 int height = size[1];
                 try {
                     if (playerSender != null) {
-                        ActionBar.sendPermanentMessage(playerSender, ChatColor.DARK_GREEN + I.t("Updating..."));
+                        ActionBar.showPermanentMessage(playerSender, ChatColor.DARK_GREEN + I.t("Updating..."));
                     }
                     ImageRendererExecutor.update(url1, scaling, uuid, map, width, height)
                             .exceptionally(exception -> {

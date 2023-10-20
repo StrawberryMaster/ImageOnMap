@@ -45,7 +45,7 @@ import fr.moribus.imageonmap.image.ImageUtils;
 import fr.moribus.imageonmap.map.PosterMap;
 import fr.moribus.imageonmap.commands.CommandException;
 import fr.moribus.imageonmap.commands.CommandInfo;
-import fr.zcraft.quartzlib.tools.text.ActionBar;
+import dev.tehbrian.imageonmap.util.ActionBar;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -97,7 +97,7 @@ public class NewCommand extends IoMCommand {
             scaling = resizeMode();
         }
         try {
-            ActionBar.sendPermanentMessage(player, ChatColor.DARK_GREEN + I.t("Rendering..."));
+            ActionBar.showPermanentMessage(player, ChatColor.DARK_GREEN + I.t("Rendering..."));
             ImageRendererExecutor.render(url, scaling, player.getUniqueId(), width, height)
                     .exceptionallyAsync((exception) -> {
                         player.sendMessage(I.t("{ce}Map rendering failed: {0}", exception.getMessage()));

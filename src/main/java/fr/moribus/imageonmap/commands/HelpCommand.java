@@ -32,7 +32,7 @@ package fr.moribus.imageonmap.commands;
 
 import dev.tehbrian.imageonmap.ImageOnMap;
 import fr.moribus.imageonmap.gui.GuiUtils;
-import fr.zcraft.quartzlib.tools.commands.PaginatedTextView;
+import fr.moribus.imageonmap.quartzlib.PaginatedTextView;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;

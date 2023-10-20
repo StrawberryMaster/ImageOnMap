@@ -30,7 +30,7 @@
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
 
-package fr.zcraft.quartzlib.tools.commands;
+package fr.moribus.imageonmap.quartzlib;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;

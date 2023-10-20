@@ -43,7 +43,7 @@ import fr.moribus.imageonmap.map.ImageMap;
 import fr.moribus.imageonmap.map.PosterMap;
 import fr.moribus.imageonmap.map.SingleMap;
 import fr.moribus.imageonmap.ui.MapItemManager;
-import fr.zcraft.quartzlib.tools.runners.RunTask;
+import dev.tehbrian.imageonmap.util.RunTask;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

@@ -30,8 +30,8 @@
 
 package fr.moribus.imageonmap.gui;
 
-import fr.zcraft.quartzlib.tools.items.InventoryUtils;
-import fr.zcraft.quartzlib.tools.runners.RunTask;
+import dev.tehbrian.imageonmap.util.InventoryUtil;
+import dev.tehbrian.imageonmap.util.RunTask;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -127,7 +127,7 @@ public abstract class InventoryGui extends GuiBase {
         // InventoryEvent.
         RunTask.nextTick(() -> {
             final InventoryView openInventoryView = getPlayer().getOpenInventory();
-            if (InventoryUtils.sameInventories(inventory, openInventoryView.getTopInventory())) {
+            if (InventoryUtil.areInventoriesEqual(inventory, openInventoryView.getTopInventory())) {
                 getPlayer().closeInventory();
             }
         });

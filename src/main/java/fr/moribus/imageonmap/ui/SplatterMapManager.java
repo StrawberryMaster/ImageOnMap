@@ -42,9 +42,9 @@ import fr.moribus.imageonmap.image.MapInitEvent;
 import fr.moribus.imageonmap.map.ImageMap;
 import fr.moribus.imageonmap.map.MapManager;
 import fr.moribus.imageonmap.map.PosterMap;
-import fr.zcraft.quartzlib.tools.runners.RunTask;
-import fr.zcraft.quartzlib.tools.world.FlatLocation;
-import fr.zcraft.quartzlib.tools.world.WorldUtils;
+import dev.tehbrian.imageonmap.util.RunTask;
+import fr.moribus.imageonmap.quartzlib.FlatLocation;
+import dev.tehbrian.imageonmap.util.WorldUtil;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
@@ -209,7 +209,7 @@ public abstract class SplatterMapManager {
             PosterOnASurface surface = new PosterOnASurface();
             FlatLocation startLocation = new FlatLocation(startFrame.getLocation(), startFrame.getFacing());
             FlatLocation endLocation = startLocation.clone().addH(poster.getColumnCount(), poster.getRowCount(),
-                    WorldUtils.get4thOrientation(player.getLocation()));
+                    WorldUtil.getOrientation(player.getLocation()));
 
             surface.loc1 = startLocation;
             surface.loc2 = endLocation;
@@ -224,7 +224,7 @@ public abstract class SplatterMapManager {
 
             int i = 0;
             for (ItemFrame frame : surface.frames) {
-                BlockFace bf = WorldUtils.get4thOrientation(player.getLocation());
+                BlockFace bf = WorldUtil.getOrientation(player.getLocation());
                 int id = poster.getMapIdAtReverseZ(i, startFrame.getFacing());
                 Rotation rot = Rotation.NONE;
                 switch (frame.getFacing()) {
@@ -339,7 +339,7 @@ public abstract class SplatterMapManager {
         ItemFrame[] matchingFrames = switch (startFrame.getFacing()) {
             case UP, DOWN -> PosterOnASurface.getMatchingMapFrames(poster, loc,
                     MapManager.getMapIdFromItemStack(startFrame.getItem()),
-                    WorldUtils.get4thOrientation(player.getLocation()));//startFrame.getFacing());
+                    WorldUtil.getOrientation(player.getLocation()));//startFrame.getFacing());
             case NORTH, SOUTH, EAST, WEST -> PosterWall.getMatchingMapFrames(poster, loc,
                     MapManager.getMapIdFromItemStack(startFrame.getItem()));
             default -> throw new IllegalStateException("Unexpected value: " + startFrame.getFacing());

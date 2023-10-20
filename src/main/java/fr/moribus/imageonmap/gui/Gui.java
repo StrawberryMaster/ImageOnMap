@@ -30,7 +30,7 @@
 
 package fr.moribus.imageonmap.gui;
 
-import fr.zcraft.quartzlib.tools.runners.RunTask;
+import dev.tehbrian.imageonmap.util.RunTask;
 import java.util.HashMap;
 import org.bukkit.entity.Player;
 
