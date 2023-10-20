@@ -1,5 +1,19 @@
-ImageOnMap
-==========
+# ImageOnMap
+
+This repository is a fork of a fork of ImageOnMap.
+
+I created this fork because, frankly, I'm fed up with the amount of errors in my server log
+when using this plugin, but I still love this plugin and I'd like to keep it alive.
+
+As I sift through all the plugins' code and ensure that it's up-to-date (i.e., replacing ChatColor with Component)
+and visibly error free, I'll move it over to my own package namespace to keep track.
+
+I hope this goes without saying, but this repository is totally experimental and no stability is ensured. Still, though,
+if you need help, feel free to ask on my [Discord server](https://thbn.me/discord).
+
+Below is the old README. I'll revamp this whole README later if I actually manage to make this plugin any better.
+
+---
 
 ## This repository was hard-forked by OKOCRAFT
 
