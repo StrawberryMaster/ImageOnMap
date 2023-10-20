@@ -38,22 +38,21 @@ package fr.moribus.imageonmap.commands.maptool;
 
 import dev.tehbrian.imageonmap.ImageOnMap;
 import dev.tehbrian.imageonmap.Permission;
+import dev.tehbrian.imageonmap.util.ActionBar;
+import fr.moribus.imageonmap.commands.CommandException;
+import fr.moribus.imageonmap.commands.CommandInfo;
 import fr.moribus.imageonmap.commands.IoMCommand;
 import fr.moribus.imageonmap.i18n.I;
 import fr.moribus.imageonmap.image.ImageRendererExecutor;
 import fr.moribus.imageonmap.image.ImageUtils;
 import fr.moribus.imageonmap.map.PosterMap;
-import fr.moribus.imageonmap.commands.CommandException;
-import fr.moribus.imageonmap.commands.CommandInfo;
-import dev.tehbrian.imageonmap.util.ActionBar;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 @CommandInfo(name = "new", usageParameters = "<URL> [resize]")
 public class NewCommand extends IoMCommand {
@@ -65,7 +64,7 @@ public class NewCommand extends IoMCommand {
             case "cover", "covered", "resize-covered" -> ImageUtils.ScalingType.COVERED;
             default -> {
                 throwInvalidArgument(I.t("Invalid Stretching mode."));
-                yield  ImageUtils.ScalingType.NONE;
+                yield ImageUtils.ScalingType.NONE;
             }
         };
     }
@@ -97,7 +96,7 @@ public class NewCommand extends IoMCommand {
             scaling = resizeMode();
         }
         try {
-            ActionBar.showPermanentMessage(player, ChatColor.DARK_GREEN + I.t("Rendering..."));
+            ActionBar.showPermanentMessage(player, Component.text(I.t("Rendering...")).color(NamedTextColor.DARK_GREEN));
             ImageRendererExecutor.render(url, scaling, player.getUniqueId(), width, height)
                     .exceptionallyAsync((exception) -> {
                         player.sendMessage(I.t("{ce}Map rendering failed: {0}", exception.getMessage()));

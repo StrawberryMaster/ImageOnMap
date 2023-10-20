@@ -38,24 +38,23 @@ package fr.moribus.imageonmap.commands.maptool;
 
 import dev.tehbrian.imageonmap.ImageOnMap;
 import dev.tehbrian.imageonmap.Permission;
+import dev.tehbrian.imageonmap.util.ActionBar;
+import fr.moribus.imageonmap.commands.CommandException;
+import fr.moribus.imageonmap.commands.CommandInfo;
 import fr.moribus.imageonmap.commands.IoMCommand;
 import fr.moribus.imageonmap.i18n.I;
 import fr.moribus.imageonmap.image.ImageRendererExecutor;
 import fr.moribus.imageonmap.image.ImageUtils;
 import fr.moribus.imageonmap.map.ImageMap;
 import fr.moribus.imageonmap.map.MapManager;
-import fr.moribus.imageonmap.commands.CommandException;
-import fr.moribus.imageonmap.commands.CommandInfo;
-import dev.tehbrian.imageonmap.util.ActionBar;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
-import org.bukkit.ChatColor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 @CommandInfo(name = "update", usageParameters = "[player name]:<map name> <new url> [stretched|covered] ")
 public class UpdateCommand extends IoMCommand {
@@ -177,7 +176,7 @@ public class UpdateCommand extends IoMCommand {
                 int height = size[1];
                 try {
                     if (playerSender != null) {
-                        ActionBar.showPermanentMessage(playerSender, ChatColor.DARK_GREEN + I.t("Updating..."));
+                        ActionBar.showPermanentMessage(playerSender, Component.text(I.t("Updating...")).color(NamedTextColor.DARK_GREEN));
                     }
                     ImageRendererExecutor.update(url1, scaling, uuid, map, width, height)
                             .exceptionally(exception -> {

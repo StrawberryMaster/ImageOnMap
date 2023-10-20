@@ -29,11 +29,6 @@ public final class ActionBar {
     };
     private static BukkitTask updaterTask;
 
-    @Deprecated
-    public static void showPermanentMessage(Player player, String message) {
-        showPermanentMessage(player, Component.text(message));
-    }
-
     /**
      * Show a constant message to the given player.
      *
