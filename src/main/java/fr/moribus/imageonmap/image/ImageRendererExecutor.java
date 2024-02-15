@@ -43,7 +43,7 @@ import fr.moribus.imageonmap.PluginConfiguration;
 import fr.moribus.imageonmap.i18n.I;
 import fr.moribus.imageonmap.map.ImageMap;
 import fr.moribus.imageonmap.map.MapManager;
-import fr.moribus.imageonmap.util.ExceptionCatcher;
+import dev.tehbrian.imageonmap.util.ExceptionLogger;
 
 import org.bukkit.Bukkit;
 
@@ -64,7 +64,7 @@ public class ImageRendererExecutor {
             new ThreadFactoryBuilder()
                     .setDaemon(true)
                     .setNameFormat("Image Renderer - #%d")
-                    .setUncaughtExceptionHandler(ExceptionCatcher::catchException)
+                    .setUncaughtExceptionHandler(ExceptionLogger::log)
                     .build()
     );
 

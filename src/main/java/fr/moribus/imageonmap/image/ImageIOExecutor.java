@@ -39,7 +39,7 @@ package fr.moribus.imageonmap.image;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import dev.tehbrian.imageonmap.ImageOnMap;
 import fr.moribus.imageonmap.map.ImageMap;
-import fr.moribus.imageonmap.util.ExceptionCatcher;
+import dev.tehbrian.imageonmap.util.ExceptionLogger;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -56,7 +56,7 @@ public class ImageIOExecutor {
             new ThreadFactoryBuilder()
                     .setDaemon(true)
                     .setNameFormat("Image IO - #%d")
-                    .setUncaughtExceptionHandler(ExceptionCatcher::catchException)
+                    .setUncaughtExceptionHandler(ExceptionLogger::log)
                     .build()
     );
 
