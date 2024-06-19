@@ -34,4 +34,4 @@ jobs:
       with:
           name: build-artifacts
           path: |
-            ImageOnMap/ImageOnMap/target/ImageOnMap-*-SNAPSHOT.jar
+            /home/runner/work/ImageOnMap/ImageOnMap/target/ImageOnMap-*-SNAPSHOT.jar
