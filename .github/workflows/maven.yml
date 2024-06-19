@@ -31,3 +31,7 @@ jobs:
       run: mvn -B package --file pom.xml
     - name: Upload artifacts
       uses: actions/upload-artifact@v4.3.3
+      with:
+          name: build-artifacts
+          path: |
+            Fabric/build/libs/imageonmap-*-fabric.jar
