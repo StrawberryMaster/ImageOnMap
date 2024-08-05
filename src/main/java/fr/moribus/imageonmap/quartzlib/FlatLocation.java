@@ -38,10 +38,15 @@ import org.jetbrains.annotations.NotNull;
 /**
  * This class provides extra utilities to the location class, to manipulate its
  * coordinates relative to an in-game 2D plane.
- * <p>Note that only NORTH, SOUTH, EAST and WEST orientations are supported.
- * If passing any other orientation, an exception will be thrown.</p>
- * <p>In this documentation, the X and Y coordinates always refer to the plane's
- * coordinates, unless otherwise specified (referred as 'real world coordinates').</p>
+ * <p>
+ * Note that only NORTH, SOUTH, EAST and WEST orientations are supported.
+ * If passing any other orientation, an exception will be thrown.
+ * </p>
+ * <p>
+ * In this documentation, the X and Y coordinates always refer to the plane's
+ * coordinates, unless otherwise specified (referred as 'real world
+ * coordinates').
+ * </p>
  */
 public class FlatLocation extends Location {
     /**
@@ -50,7 +55,8 @@ public class FlatLocation extends Location {
     private final BlockFace facing;
 
     /**
-     * Creates a new FlatLocation from a world, real-world coordinates and the facing direction.
+     * Creates a new FlatLocation from a world, real-world coordinates and the
+     * facing direction.
      *
      * @param world  The world.
      * @param x      The real-world X coordinate.
@@ -66,7 +72,8 @@ public class FlatLocation extends Location {
     }
 
     /**
-     * Creates a new FlatLocation from a world, real-world coordinates and the facing direction.
+     * Creates a new FlatLocation from a world, real-world coordinates and the
+     * facing direction.
      *
      * @param world  The world.
      * @param x      The real-world X coordinate.
@@ -90,7 +97,8 @@ public class FlatLocation extends Location {
     }
 
     /**
-     * Creates a new FlatLocation from a Bukkit real-world Location and the facing direction.
+     * Creates a new FlatLocation from a Bukkit real-world Location and the facing
+     * direction.
      *
      * @param loc    The location
      * @param facing The facing direction.
@@ -178,6 +186,11 @@ public class FlatLocation extends Location {
                 loc.setZ(Math.min(loc1.getZ(), loc2.getZ()));
                 loc.setX(loc1.getX());
             }
+            case UP, DOWN, NORTH_EAST, NORTH_WEST, SOUTH_EAST, SOUTH_WEST, EAST_NORTH_EAST, EAST_SOUTH_EAST,
+                    NORTH_NORTH_EAST, NORTH_NORTH_WEST, SOUTH_SOUTH_EAST, SOUTH_SOUTH_WEST, WEST_NORTH_WEST,
+                    WEST_SOUTH_WEST, SELF -> {
+                throw new UnsupportedOperationException("Non-N/S/E/W orientations are currently not supported.");
+            }
         }
 
         return loc;
@@ -185,6 +198,7 @@ public class FlatLocation extends Location {
 
     /**
      * Gets the orientation of the plane.
+     * 
      * @return The orientation of the plane.
      */
     public BlockFace getFacing() {
@@ -212,6 +226,7 @@ public class FlatLocation extends Location {
             case EAST -> add(x, 0, z);
             case WEST -> add(-x, 0, -z);
             case SOUTH -> add(-x, 0, z);
+            default -> throw new UnsupportedOperationException("addToLocation called with non-N/S/E/W orientation.");
         }
 
         return this;
