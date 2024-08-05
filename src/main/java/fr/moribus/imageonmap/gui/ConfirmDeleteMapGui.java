@@ -42,6 +42,9 @@ import fr.moribus.imageonmap.i18n.I;
 import fr.moribus.imageonmap.map.ImageMap;
 import fr.moribus.imageonmap.map.MapManager;
 import fr.moribus.imageonmap.map.MapManagerException;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -54,7 +57,6 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.MapMeta;
-
 
 public class ConfirmDeleteMapGui extends ActionGui {
     private static final int BUTTONS_WIDTH = 4;
@@ -101,7 +103,6 @@ public class ConfirmDeleteMapGui extends ActionGui {
      */
     private final Random random = new Random();
 
-
     /**
      * @param mapToDelete The map being deleted.
      */
@@ -115,7 +116,6 @@ public class ConfirmDeleteMapGui extends ActionGui {
         setTitle(I.t(getPlayerLocale(), "{0} » {black}Confirm deletion", mapToDelete.getName()));
         setSize(6 * 9);
 
-
         /* ** Item representation of the image being deleted ** */
 
         ItemStack item = new ItemStack(Material.FILLED_MAP);
@@ -126,8 +126,7 @@ public class ConfirmDeleteMapGui extends ActionGui {
                 "",
                 I.t(getPlayerLocale(), "{gray}Name: {white}{0}", mapToDelete.getName()),
                 I.t(getPlayerLocale(), "{gray}Map ID: {white}{0}", mapToDelete.getId()),
-                I.t(getPlayerLocale(), "{gray}Maps inside: {white}{0}", mapToDelete.getMapsIDs().length)
-        )));
+                I.t(getPlayerLocale(), "{gray}Maps inside: {white}{0}", mapToDelete.getMapsIDs().length))));
         meta.addItemFlags(ItemFlag.values());
         meta.setMapId(0);
         item.setItemMeta(meta);
@@ -148,11 +147,13 @@ public class ConfirmDeleteMapGui extends ActionGui {
     }
 
     private ItemStack createDeleteSubButton() {
-        return createSubButton(Material.RED_STAINED_GLASS_PANE, ChatColor.RED + "Delete the map", DELETE_MESSAGES);
+        return createSubButton(Material.RED_STAINED_GLASS_PANE, Component.text("Delete", NamedTextColor.RED).content(),
+                DELETE_MESSAGES);
     }
 
     private ItemStack createCancelSubButton() {
-        return createSubButton(Material.LIME_STAINED_GLASS_PANE, ChatColor.GREEN + "Cancel", CANCEL_MESSAGES);
+        return createSubButton(Material.LIME_STAINED_GLASS_PANE,
+                Component.text("Cancel", NamedTextColor.GREEN).content(), CANCEL_MESSAGES);
     }
 
     @SuppressWarnings("deprecation")
@@ -189,11 +190,11 @@ public class ConfirmDeleteMapGui extends ActionGui {
             getPlayer().sendMessage(I.t("{gray}Map successfully deleted."));
         } catch (MapManagerException ex) {
             ImageOnMap.get().getLogger().log(Level.WARNING, "Error while deleting map", ex);
-            getPlayer().sendMessage(ChatColor.RED + ex.getMessage());
+            getPlayer().sendMessage(Component.text(ex.getMessage(), NamedTextColor.RED));
         }
 
-
-        // We try to open the map list GUI, if the map was deleted, before the details GUI
+        // We try to open the map list GUI, if the map was deleted, before the details
+        // GUI
         // (so the grandparent GUI).
         if (getParent() != null && getParent().getParent() != null) {
             Gui.open(getPlayer(), getParent().getParent());
