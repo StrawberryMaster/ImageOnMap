@@ -60,8 +60,10 @@ public abstract class Command {
     /**
      * Parses arguments to extract flags.
      *
-     * <p>This method is made static and with all data as argument to be able to
-     * be unit tested.</p>
+     * <p>
+     * This method is made static and with all data as argument to be able to
+     * be unit tested.
+     * </p>
      *
      * @param args          The raw arguments.
      * @param acceptedFlags A set with lowercase accepted flags.
@@ -71,7 +73,7 @@ public abstract class Command {
      *                      the raw arguments.
      */
     private static void parseArgs(final String[] args, final Set<String> acceptedFlags, List<String> realArgs,
-                                  Set<String> flags) {
+            Set<String> flags) {
         for (final String arg : args) {
             if (!FLAG_PATTERN.matcher(arg).matches()) {
                 realArgs.add(arg);
@@ -161,7 +163,6 @@ public abstract class Command {
         info(sender, message);
     }
 
-
     /**
      * Displays a green success message.
      *
@@ -194,7 +195,9 @@ public abstract class Command {
     /**
      * Runs the command.
      *
-     * <p>Use protected fields to access data (like {@link #args}).</p>
+     * <p>
+     * Use protected fields to access data (like {@link #args}).
+     * </p>
      *
      * @throws CommandException If something bad happens.
      */
@@ -223,8 +226,10 @@ public abstract class Command {
         flagsEnabled = withFlags != null;
         if (flagsEnabled) {
             acceptedFlags = new HashSet<>();
-            for (final String flag : withFlags.value()) {
-                acceptedFlags.add(flag.toLowerCase());
+            if (withFlags != null) {
+                for (final String flag : withFlags.value()) {
+                    acceptedFlags.add(flag.toLowerCase());
+                }
             }
         } else {
             acceptedFlags = Collections.emptySet();
@@ -245,7 +250,9 @@ public abstract class Command {
     /**
      * Tab-completes the command. This command should be overridden.
      *
-     * <p>Use protected fields to access data (like {@link #args}).</p>
+     * <p>
+     * Use protected fields to access data (like {@link #args}).
+     * </p>
      *
      * @return A list with suggestions, or {@code null} without suggestions.
      * @throws CommandException If something bad happens.
@@ -294,7 +301,8 @@ public abstract class Command {
             if (canExecute(sender)) {
                 result = complete();
             }
-        } catch (CommandException ignored) { }
+        } catch (CommandException ignored) {
+        }
 
         this.sender = null;
         this.args = null;
@@ -308,6 +316,7 @@ public abstract class Command {
 
     /**
      * Returns this command's usage parameters.
+     * 
      * @return This command's usage parameters.
      */
     public String getUsageParameters() {
@@ -316,8 +325,9 @@ public abstract class Command {
 
     /**
      * Returns this command's usage string.
+     * 
      * @return This command's usage string, formatted like this: {@code
-     * /{command} {sub-command} {usage parameters}}.
+     *         /{command} {sub-command} {usage parameters}}.
      */
     public String getUsageString() {
         return "/" + commandGroup.getUsualName() + " " + commandName + " " + usageParameters;
@@ -325,17 +335,18 @@ public abstract class Command {
 
     /**
      * Returns the name of this command.
+     * 
      * @return The name of this command.
      */
     public String getName() {
         return commandName;
     }
 
-
     ///////////// Common methods for commands /////////////
 
     /**
      * Get the command group.
+     * 
      * @return The command group this command belongs to.
      */
     CommandGroup getCommandGroup() {
@@ -344,9 +355,10 @@ public abstract class Command {
 
     /**
      * Checks if the given name matches this command's, or any of its aliases.
+     * 
      * @param name A command name.
      * @return {@code true} if this command can be called like that,
-     *     checking (without case) the command name then aliases.
+     *         checking (without case) the command name then aliases.
      */
     public boolean matches(String name) {
         if (commandName.equals(name.toLowerCase())) {
@@ -362,11 +374,11 @@ public abstract class Command {
         return false;
     }
 
-
     ///////////// Methods for command execution /////////////
 
     /**
      * Builds a command usage string.
+     * 
      * @param args Some arguments.
      * @return A ready-to-be-executed command string with the passed arguments.
      */
@@ -440,24 +452,34 @@ public abstract class Command {
     /**
      * Checks if a flag is set.
      *
-     * <p> To use this functionality, your command class must be annotated by
-     * {@link WithFlags}. </p>
+     * <p>
+     * To use this functionality, your command class must be annotated by
+     * {@link WithFlags}.
+     * </p>
      *
-     * <p>A flag is a value precessed by one or two dashes, and composed of
-     * alphanumerical characters, and dashes.<br> Flags are not
-     * case-sensitive.</p>
+     * <p>
+     * A flag is a value precessed by one or two dashes, and composed of
+     * alphanumerical characters, and dashes.<br>
+     * Flags are not
+     * case-sensitive.
+     * </p>
      *
-     * <p>One-letter flags are passed using the syntax {@code -f} (for the
+     * <p>
+     * One-letter flags are passed using the syntax {@code -f} (for the
      * {@code f} flag). Multiple one-letter flags can be passed at once, like
      * this: {@code -fcrx} (for the {@code f}, {@code c}, {@code r}, and {@code
-     * x} flags).</p>
+     * x} flags).
+     * </p>
      *
-     * <p>Multiple-letter flags are passed using the syntax {@code --flag} (for
+     * <p>
+     * Multiple-letter flags are passed using the syntax {@code --flag} (for
      * the {@code flag} flag). To pass multiple multiple-letter flags, you must
      * repeat the {@code --}: {@code --flag --other-flag} (for the flags {@code
-     * flag} and {@code other-flag}).</p>
+     * flag} and {@code other-flag}).
+     * </p>
      *
-     * <p>With the {@link WithFlags} annotation alone, all flags are caught.
+     * <p>
+     * With the {@link WithFlags} annotation alone, all flags are caught.
      * You can constrain the flags retrieved by passing an array of flags to the
      * annotation, like this:
      *
@@ -465,9 +487,11 @@ public abstract class Command {
      *     \@WithFlags({"flag", "f"})
      * </pre>
      *
-     * <p>If a flag-like argument is passed but not in the flags whitelist, it will
+     * <p>
+     * If a flag-like argument is passed but not in the flags whitelist, it will
      * be left in the {@link #args} parameters like any other arguments. Else,
-     * the retrieved flags are removed from the arguments list.</p>
+     * the retrieved flags are removed from the arguments list.
+     * </p>
      *
      * @return {@code true} if the flag was passed by the player.
      */
