@@ -32,59 +32,53 @@ package fr.moribus.imageonmap.commands;
 
 import fr.moribus.imageonmap.gui.GuiUtils;
 
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
-import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextDecoration;
+import org.bukkit.ChatColor;
 
 public class CommandException extends Exception {
     private final Reason reason;
     private final Command command;
     private final String extra;
 
+    /**
+     * A new CommandException.
+     * 
+     * @param command The command that raised the exception.
+     * @param reason  The reason code.
+     * @param extra   Any extra message.
+     */
     public CommandException(Command command, Reason reason, String extra) {
-        super(getReasonString(command, reason, extra));
         this.command = command;
         this.reason = reason;
         this.extra = extra;
-    }
-
-    public CommandException() {
-        super(getReasonString());
-        this.command = null;
-        this.reason = null;
-        this.extra = null;
     }
 
     public CommandException(Command command, Reason reason) {
         this(command, reason, "");
     }
 
-    private static String getReasonString(Command command, Reason reason, String extra) {
-        switch (reason) {
-            case COMMANDSENDER_EXPECTED_PLAYER:
-                return Component.text("You must be a player to use this command.").toString();
-            case INVALID_PARAMETERS:
-                Component prefix = Component.text(Commands.CHAT_PREFIX + " ", NamedTextColor.GOLD);
-                return Component.text("\n")
-                        .append(Component.text(Commands.CHAT_PREFIX + ' ', NamedTextColor.RED))
-                        .append(Component.text("Invalid argument", NamedTextColor.RED, TextDecoration.BOLD))
-                        .append(Component.text('\n'))
-                        .append(GuiUtils.generatePrefixedFixedLengthComponent(Component.text(Commands.CHAT_PREFIX + " ", NamedTextColor.RED), extra))
-                        .append(Component.text('\n'))
-                        .append(GuiUtils.generatePrefixedFixedLengthComponent(prefix, "Usage: " + command.getUsageString()))
-                        .append(Component.text('\n'))
-                        .append(GuiUtils.generatePrefixedFixedLengthComponent(prefix, "For more information, use /" +
-                                command.getCommandGroup().getUsualName() + " help " + command.getName()))
-                        .toString();
-            case COMMAND_ERROR:
-                return extra.isEmpty() ? Component.text("An unknown error suddenly happened.").toString() : Component.text(extra).toString();
-            case SENDER_NOT_AUTHORIZED:
-                return Component.text("You do not have the permission to use this command.").toString();
-            default:
-                return Component.text("An error occurred.").toString();
-        }
-    }
+    /**
+      * Builds the "reason" string for this command exception.
+      * @return The reason string.
+      */
+     public String getReasonString() {
+         return switch (reason) {
+             case COMMANDSENDER_EXPECTED_PLAYER ->  "You must be a player to use this command.";
+             case INVALID_PARAMETERS -> {
+                 final String prefix = ChatColor.GOLD + Commands.CHAT_PREFIX + " " + ChatColor.RESET;
+                 yield "\n"
+                         + ChatColor.RED + Commands.CHAT_PREFIX + ' ' + ChatColor.BOLD + "Invalid argument" + '\n'
+                         + GuiUtils.generatePrefixedFixedLengthString(ChatColor.RED + Commands.CHAT_PREFIX + " ", extra)
+                         + '\n'
+                         + GuiUtils.generatePrefixedFixedLengthString(prefix, "Usage: " + command.getUsageString())
+                         + '\n'
+                         + GuiUtils.generatePrefixedFixedLengthString(prefix,
+                         "For more information, use /" + command.getCommandGroup().getUsualName()
+                                 + " help " + command.getName());
+             }
+             case COMMAND_ERROR -> extra.isEmpty() ? "An unknown error suddenly happened." : extra;
+             case SENDER_NOT_AUTHORIZED -> "You do not have the permission to use this command.";
+         };
+     }
 
     public enum Reason {
         COMMANDSENDER_EXPECTED_PLAYER,

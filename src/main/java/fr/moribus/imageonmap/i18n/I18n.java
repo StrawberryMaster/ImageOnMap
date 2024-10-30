@@ -35,10 +35,6 @@ import fr.moribus.imageonmap.i18n.translators.Translator;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
-import net.kyori.adventure.text.format.NamedTextColor;
-
 import java.io.File;
 import java.text.MessageFormat;
 import java.util.Comparator;
@@ -56,16 +52,15 @@ import java.util.jar.JarFile;
 public class I18n {
     private static final Map<Locale, Set<Translator>> translators = new ConcurrentHashMap<>();
 
-    private static final Comparator<Translator> TRANSLATORS_COMPARATOR =
-            (translator1, translator2) -> {
-                if (translator1.equals(translator2)) {
-                    return 0;
-                } else if (translator1.getPriority() == translator2.getPriority()) {
-                    return translator1.getFilePath().compareTo(translator2.getFilePath());
-                } else {
-                    return Integer.compare(translator2.getPriority(), translator1.getPriority());
-                }
-            };
+    private static final Comparator<Translator> TRANSLATORS_COMPARATOR = (translator1, translator2) -> {
+        if (translator1.equals(translator2)) {
+            return 0;
+        } else if (translator1.getPriority() == translator2.getPriority()) {
+            return translator1.getFilePath().compareTo(translator2.getFilePath());
+        } else {
+            return Integer.compare(translator2.getPriority(), translator1.getPriority());
+        }
+    };
 
     private static Locale primaryLocale = null;
     private static Locale fallbackLocale = null;
@@ -73,14 +68,15 @@ public class I18n {
     private static final String i18nDirectory = "i18n";
 
     private static final boolean userFriendlyFormatting = true;
-    private static final TextColor errorColor = NamedTextColor.RED;
-    private static final TextColor noticeColor = NamedTextColor.WHITE;
-    private static final TextColor successColor = NamedTextColor.GREEN;
-    private static final TextColor statusColor = NamedTextColor.GRAY;
-    private static final TextColor commandColor = NamedTextColor.GOLD;
+    private static final String errorColor = ChatColor.RED.toString();
+    private static final String noticeColor = ChatColor.WHITE.toString();
+    private static final String successColor = ChatColor.GREEN.toString();
+    private static final String statusColor = ChatColor.GRAY.toString();
+    private static final String commandColor = ChatColor.GOLD.toString();
 
     /**
-     * @return The name of the subdirectory where the translations are stored. Default: "i18n".
+     * @return The name of the subdirectory where the translations are stored.
+     *         Default: "i18n".
      */
     public static String getI18nDirectory() {
         return i18nDirectory;
@@ -149,13 +145,17 @@ public class I18n {
         return result;
     }
 
-
-    /* **  TRANSLATIONS LOADING METHODS  ** */
+    /* ** TRANSLATIONS LOADING METHODS ** */
 
     /**
      * Loads a file into the translations system.
-     * <p>If this file is a directory, all files inside will be loaded, recursively.</p>
-     * <p>The locale will be extracted from the file name, and the format, from the file's extension.</p>
+     * <p>
+     * If this file is a directory, all files inside will be loaded, recursively.
+     * </p>
+     * <p>
+     * The locale will be extracted from the file name, and the format, from the
+     * file's extension.
+     * </p>
      *
      * @param file     The file to load.
      * @param priority The priority to set for this translator. Translators with
@@ -204,8 +204,9 @@ public class I18n {
      * Retrieves the translators chain for a given locale.
      *
      * @param locale The locale.
-     * @return The chain, in an ordered {@link TreeSet}. Will never be {@code null}, but can
-     * be empty if no translator was registered for that locale.
+     * @return The chain, in an ordered {@link TreeSet}. Will never be {@code null},
+     *         but can
+     *         be empty if no translator was registered for that locale.
      */
     private static Set<Translator> getTranslatorsChain(final Locale locale) {
         return I18n.translators.computeIfAbsent(locale, k -> new TreeSet<>(TRANSLATORS_COMPARATOR));
@@ -214,14 +215,18 @@ public class I18n {
     /**
      * Tries to translate the given string from the given chain.
      *
-     * @param chain           The translators chain. All translators will be tested one after another
-     *                        in order, until one yields a translation.
-     * @param context         The translation context. {@code null} if no context defined.
-     * @param messageId       The string to translate.
-     * @param count           The count of items to use to choose the singular or plural form.
-     *                        {@code null} if this translation does not have a plural form.
-     * @return The non-formatted translated string, if one of the translators was able to
-     * translate it; else, {@code null}.
+     * @param chain     The translators chain. All translators will be tested one
+     *                  after another
+     *                  in order, until one yields a translation.
+     * @param context   The translation context. {@code null} if no context defined.
+     * @param messageId The string to translate.
+     * @param count     The count of items to use to choose the singular or plural
+     *                  form.
+     *                  {@code null} if this translation does not have a plural
+     *                  form.
+     * @return The non-formatted translated string, if one of the translators was
+     *         able to
+     *         translate it; else, {@code null}.
      */
     private static String translateFromChain(Set<Translator> chain, String context, String messageId, Integer count) {
         for (Translator translator : chain) {
@@ -237,35 +242,48 @@ public class I18n {
     /**
      * Translates the given string using the given locale.
      *
-     * <p> If the given locale is null, tries to use the primary locale;
+     * <p>
+     * If the given locale is null, tries to use the primary locale;
      * fallbacks to the fallback locale if the string cannot be translated;
-     * fallbacks to the input text if the string still cannot be translated. </p>
+     * fallbacks to the input text if the string still cannot be translated.
+     * </p>
      *
-     * <p> The count is likely to be used in the string, so if, for a translation with plurals, only
-     * a count is given, this count is also interpreted as a parameter (the first and only one, {@code
-     * {0}}).</p>
+     * <p>
+     * The count is likely to be used in the string, so if, for a translation with
+     * plurals, only
+     * a count is given, this count is also interpreted as a parameter (the first
+     * and only one, {@code
+     * {0}}).
+     * </p>
      *
      * @param locale          The locale to use to translate the string.
-     * @param context         The translation context. {@code null} if no context defined.
+     * @param context         The translation context. {@code null} if no context
+     *                        defined.
      * @param messageId       The string to translate.
-     * @param messageIdPlural The plural version of the string to translate. {@code null} if this
+     * @param messageIdPlural The plural version of the string to translate.
+     *                        {@code null} if this
      *                        translation does not have a plural form.
-     * @param count           The count of items to use to choose the singular or plural form.
-     *                        {@code null} if this translation does not have a plural form.
-     * @param parameters      The parameters, replacing values like {@code {0}} in the translated
+     * @param count           The count of items to use to choose the singular or
+     *                        plural form.
+     *                        {@code null} if this translation does not have a
+     *                        plural form.
+     * @param parameters      The parameters, replacing values like {@code {0}} in
+     *                        the translated
      *                        string.
      * @return The translated text, with the parameters replaced by their values.
      */
     public static String translate(Locale locale, String context, String messageId, String messageIdPlural,
-                                   Integer count, Object... parameters) {
+            Integer count, Object... parameters) {
         String translated = null;
         Locale usedLocale = Locale.getDefault();
 
-        // Simplifies the programmer's work. The count is likely to be used in the string, so if,
-        // for a translation with plurals, only a count is given, this count is also interpreted as
+        // Simplifies the programmer's work. The count is likely to be used in the
+        // string, so if,
+        // for a translation with plurals, only a count is given, this count is also
+        // interpreted as
         // a parameter (the first and only one, {0}).
         if (count != null && (parameters == null || parameters.length == 0)) {
-            parameters = new Object[]{count};
+            parameters = new Object[] { count };
         }
 
         // We first try the given locale, or a close one, if non-null.
@@ -275,7 +293,8 @@ public class I18n {
             if (translated != null) {
                 usedLocale = locale;
             } else {
-                // Then, we lookup for a close locale (same language and country, then same language)
+                // Then, we lookup for a close locale (same language and country, then same
+                // language)
                 Locale perfect = null;
                 final Set<Locale> close = new HashSet<>();
 
@@ -289,13 +308,13 @@ public class I18n {
                     }
                 }
 
-                if (perfect != null && (translated =
-                        translateFromChain(getTranslatorsChain(perfect), context, messageId, count))
-                        != null) {
+                if (perfect != null && (translated = translateFromChain(getTranslatorsChain(perfect), context,
+                        messageId, count)) != null) {
                     usedLocale = perfect;
                 } else {
                     for (Locale closeLocale : close) {
-                        if ((translated = translateFromChain(getTranslatorsChain(closeLocale), context, messageId, count)) != null) {
+                        if ((translated = translateFromChain(getTranslatorsChain(closeLocale), context, messageId,
+                                count)) != null) {
                             usedLocale = closeLocale;
                             break;
                         }
@@ -305,14 +324,14 @@ public class I18n {
         }
 
         // If we still don't have anything, we try the primary then fallback locales
-        if (translated == null && primaryLocale != null && (translated =
-                translateFromChain(getTranslatorsChain(primaryLocale), context, messageId, count))
-                != null) {
+        if (translated == null && primaryLocale != null
+                && (translated = translateFromChain(getTranslatorsChain(primaryLocale), context, messageId,
+                        count)) != null) {
             usedLocale = primaryLocale;
         }
-        if (translated == null && fallbackLocale != null && (translated =
-                translateFromChain(getTranslatorsChain(fallbackLocale), context, messageId, count))
-                != null) {
+        if (translated == null && fallbackLocale != null
+                && (translated = translateFromChain(getTranslatorsChain(fallbackLocale), context, messageId,
+                        count)) != null) {
             usedLocale = fallbackLocale;
         }
 
@@ -325,30 +344,29 @@ public class I18n {
                 translated = messageId;
             }
 
-            usedLocale = primaryLocale != null ? primaryLocale :
-                    (fallbackLocale != null ? fallbackLocale : Locale.getDefault());
+            usedLocale = primaryLocale != null ? primaryLocale
+                    : (fallbackLocale != null ? fallbackLocale : Locale.getDefault());
         }
-
 
         if (userFriendlyFormatting) {
             translated = replaceFormattingCodes(translated);
         }
 
-        // We replace « ' » with « '' » to escape single quotes, so the formatter leave them alive
+        // We replace « ' » with « '' » to escape single quotes, so the formatter leave
+        // them alive
         MessageFormat formatter = new MessageFormat(translated.replace("'", "''"), usedLocale);
 
-        // We remove non-breaking spaces, as Minecraft ignores them (breaking texts regardless of their presence) and
+        // We remove non-breaking spaces, as Minecraft ignores them (breaking texts
+        // regardless of their presence) and
         // often badly displays them (dashed square with NBSP inside).
         return formatter.format(parameters)
-                .replace("\u00A0", " ").replace("\u2007", " ").replace("\u202F", " ")  // Non-breaking spaces
+                .replace("\u00A0", " ").replace("\u2007", " ").replace("\u202F", " ") // Non-breaking spaces
                 .replace("\u2009", " ") // Thin space
                 .replace("\u2060",
                         ""); // “WORD-JOINER” non-breaking space (zero-width)
     }
 
-
-
-    /* **  TRANSLATION METHODS  ** */
+    /* ** TRANSLATION METHODS ** */
 
     /**
      * Replaces some formatting codes into system codes.
@@ -390,7 +408,8 @@ public class I18n {
     }
 
     /**
-     * Sets the primary locale, the locale always used if available to translate the strings.
+     * Sets the primary locale, the locale always used if available to translate the
+     * strings.
      *
      * @param locale The locale. If {@code null}, system locale used.
      */
@@ -398,11 +417,11 @@ public class I18n {
         primaryLocale = locale != null ? locale : Locale.getDefault();
     }
 
-
-    /* **  METADATA METHODS  ** */
+    /* ** METADATA METHODS ** */
 
     /**
-     * Sets the fallback locale, used if a translation is not available in the primary locale.
+     * Sets the fallback locale, used if a translation is not available in the
+     * primary locale.
      *
      * @param locale The locale.
      */
