@@ -35,6 +35,9 @@ import fr.moribus.imageonmap.i18n.translators.Translator;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+
 import java.io.File;
 import java.text.MessageFormat;
 import java.util.Comparator;
@@ -69,11 +72,11 @@ public class I18n {
     private static final String i18nDirectory = "i18n";
 
     private static final boolean userFriendlyFormatting = true;
-    private static final String errorColor = ChatColor.RED.toString();
-    private static final String noticeColor = ChatColor.WHITE.toString();
-    private static final String successColor = ChatColor.GREEN.toString();
-    private static final String statusColor = ChatColor.GRAY.toString();
-    private static final String commandColor = ChatColor.GOLD.toString();
+    private static final TextColor errorColor = NamedTextColor.RED;
+    private static final TextColor noticeColor = NamedTextColor.WHITE;
+    private static final TextColor successColor = NamedTextColor.GREEN;
+    private static final TextColor statusColor = NamedTextColor.GRAY;
+    private static final TextColor commandColor = NamedTextColor.GOLD;
 
     /**
      * @return The name of the subdirectory where the translations are stored. Default: "i18n".
