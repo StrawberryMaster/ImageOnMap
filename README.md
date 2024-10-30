@@ -1,6 +1,15 @@
 # ImageOnMap
 
-This repository is a fork of a fork of ImageOnMap.
+This repository is a fork of [a fork](https://github.com/TehBrian/ImageOnMap) of [a fork](https://github.com/okocraft/ImageOnMap) of [ImageOnMap](https://github.com/zDevelopers/ImageOnMap).
+
+The rationale for this fork (alongside most of the others, I assume) is the amount of server errors 
+popping up left and right due to changes in the MC codebase over the years. In one specific server I contribute in, which also has the excellent [ImageFrame](https://github.com/LOOHP/ImageFrame), converting the mods to IF has unfortunately resulted in some issues — leaving it stuck in 1.20.1 — and I was voluntarily commissioned to make this fork work for 1.21. *Et voilà...*
+
+Contributions are welcome! In theory this works, but still needs some more testing.
+
+Below are the README from all the other forks this derived frm.
+
+---
 
 I created this fork because, frankly, I'm fed up with the amount of errors in my server log
 when using this plugin, but I still love this plugin and I'd like to keep it alive.

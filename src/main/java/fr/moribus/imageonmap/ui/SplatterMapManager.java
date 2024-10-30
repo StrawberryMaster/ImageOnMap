@@ -73,7 +73,6 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-
 public abstract class SplatterMapManager {
 
     private static final NamespacedKey SPLATTER_KEY = new NamespacedKey("imageonmap", "splatter");
@@ -128,7 +127,8 @@ public abstract class SplatterMapManager {
      * prettier).
      *
      * @param itemStack The item stack to mark as a splatter map.
-     * @return The modified item stack. The instance may be different if the passed item stack is not a craft itemstack.
+     * @return The modified item stack. The instance may be different if the passed
+     *         item stack is not a craft itemstack.
      */
     public static ItemStack addSplatterAttribute(final ItemStack itemStack) {
         var meta = itemStack.getItemMeta();
@@ -150,7 +150,8 @@ public abstract class SplatterMapManager {
      * @return True if the attribute was detected.
      */
     public static boolean hasSplatterAttributes(ItemStack itemStack) {
-        var value = itemStack.getItemMeta().getPersistentDataContainer().getOrDefault(SPLATTER_KEY, PersistentDataType.BYTE, (byte) 0);
+        var value = itemStack.getItemMeta().getPersistentDataContainer().getOrDefault(SPLATTER_KEY,
+                PersistentDataType.BYTE, (byte) 0);
         return value == 1;
     }
 
@@ -166,7 +167,6 @@ public abstract class SplatterMapManager {
         }
         return hasSplatterAttributes(itemStack) && MapManager.managesMap(itemStack);
     }
-
 
     /**
      * Return true if it has a specified splatter map
@@ -234,21 +234,15 @@ public abstract class SplatterMapManager {
                         rot = Rotation.FLIPPED;
                         break;
                     default:
-                        //throw new IllegalStateException("Unexpected value: " + frame.getFacing());
+                        // throw new IllegalStateException("Unexpected value: " + frame.getFacing());
                 }
-                //Rotation management relative to player rotation the default position is North,
+                // Rotation management relative to player rotation the default position is
+                // North,
                 // when on ceiling we flipped the rotation
-                RunTask.later(() -> {
-                    ItemStack item = new ItemStack(Material.FILLED_MAP);
-                    MapMeta meta = (MapMeta) item.getItemMeta();
-                    meta.setMapId(id);
-                    item.setItemMeta(meta);
-
-                    frame.setItem(item);
-                }, 5L);
+                setupMap(player, frame, id);
 
                 if (i == 0) {
-                    //First map need to be rotate one time CounterClockwise
+                    // First map need to be rotate one time CounterClockwise
                     rot = rot.rotateCounterClockwise();
                 }
 
@@ -301,23 +295,30 @@ public abstract class SplatterMapManager {
 
                 int id = poster.getMapIdAtReverseY(i);
 
-                RunTask.later(() -> {
-                    ItemStack item = new ItemStack(Material.FILLED_MAP);
-                    MapMeta meta = (MapMeta) item.getItemMeta();
-                    meta.setMapId(id);
-                    item.setItemMeta(meta);
+                setupMap(player, frame, id);
 
-                    frame.setItem(item);
-                }, 5L);
-
-
-                //Force reset of rotation
+                // Force reset of rotation
                 frame.setRotation(Rotation.NONE);
                 MapInitEvent.initMap(id);
                 ++i;
             }
         }
         return true;
+    }
+
+    /**
+     * Add properties to the frames
+     * 
+     * @param player The player placing the map
+     * @param frame  The frame to add properties to
+     * @return the {@link ItemFrame}
+     */
+    private static void setupMap(Player player, ItemFrame frame, int id) {
+        RunTask.later(() -> {
+            addPropertiesToFrames(player, frame);
+            ItemStack item = MapItemManager.createMapItem(id, "", true, false);
+            frame.setItem(item);
+        }, 5L);
     }
 
     /**
@@ -339,7 +340,7 @@ public abstract class SplatterMapManager {
         ItemFrame[] matchingFrames = switch (startFrame.getFacing()) {
             case UP, DOWN -> PosterOnASurface.getMatchingMapFrames(poster, loc,
                     MapManager.getMapIdFromItemStack(startFrame.getItem()),
-                    WorldUtil.getOrientation(player.getLocation()));//startFrame.getFacing());
+                    WorldUtil.getOrientation(player.getLocation()));// startFrame.getFacing());
             case NORTH, SOUTH, EAST, WEST -> PosterWall.getMatchingMapFrames(poster, loc,
                     MapManager.getMapIdFromItemStack(startFrame.getItem()));
             default -> throw new IllegalStateException("Unexpected value: " + startFrame.getFacing());
