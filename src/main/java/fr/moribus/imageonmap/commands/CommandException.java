@@ -33,7 +33,9 @@ package fr.moribus.imageonmap.commands;
 import fr.moribus.imageonmap.gui.GuiUtils;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 
 public class CommandException extends Exception {
     private final Reason reason;
@@ -45,6 +47,13 @@ public class CommandException extends Exception {
         this.command = command;
         this.reason = reason;
         this.extra = extra;
+    }
+
+    public CommandException() {
+        super(getReasonString());
+        this.command = null;
+        this.reason = null;
+        this.extra = null;
     }
 
     public CommandException(Command command, Reason reason) {

@@ -36,6 +36,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.NamedTextColor;
 
 import java.io.File;
