@@ -53,6 +53,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -60,7 +61,7 @@ import java.util.ArrayList;
 public class UpdateCommand extends IoMCommand {
     @Override
     protected void run() throws CommandException {
-        //TODO fix the issue where to many quick usage of offlineNameFetch will return null
+        // TODO fix the issue where to many quick usage of offlineNameFetch will return null
         ArrayList<String> arguments = getArgs();
         String warningMsg;
         if (arguments.size() > 4) {
@@ -70,8 +71,7 @@ public class UpdateCommand extends IoMCommand {
             return;
         }
         if (arguments.size() < 2) {
-            warningMsg =
-                    "Too few parameters! Usage: /maptool update [player name]:<map name> <new url> [stretched|covered]";
+            warningMsg = "Too few parameters! Usage: /maptool update [player name]:<map name> <new url> [stretched|covered]";
             warning(I.t(warningMsg));
             return;
         }
@@ -92,7 +92,7 @@ public class UpdateCommand extends IoMCommand {
         }
         playerSender = playerSender1;
 
-        //Sent by a non player and not enough arguments
+        // Sent by a non player and not enough arguments
         if (arguments.size() == 2 && playerSender == null) {
             throwInvalidArgument("Usage: /maptool update [player name]:<map name> <new url> [stretched|covered]");
             return;
@@ -145,8 +145,9 @@ public class UpdateCommand extends IoMCommand {
             default -> ImageUtils.ScalingType.CONTAINED;
         };
 
-        //TODO passer en static
-        //ImageOnMap.getPlugin().getCommandWorker().offlineNameFetch(playerName, uuid -> {
+        // TODO passer en static
+        // ImageOnMap.getPlugin().getCommandWorker().offlineNameFetch(playerName, uuid
+        // -> {
         retrieveUUID(playerName, uuid -> {
 
             ImageMap map = MapManager.getMap(uuid, mapName);
@@ -158,11 +159,12 @@ public class UpdateCommand extends IoMCommand {
 
             URL url1;
             try {
-                url1 = new URL(url);
-                //TODO replace by a check of the load status.(if not loaded load the mapmanager)
-                MapManager.load();//we don't want to spam the console each time we reload the mapManager
+                url1 = URI.create(url).toURL();
+                // TODO replace by a check of the load status.(if not loaded load the
+                // mapmanager)
+                MapManager.load();// we don't want to spam the console each time we reload the mapManager
 
-                Integer[] size = {1, 1};
+                Integer[] size = { 1, 1 };
                 if (map.getType() == ImageMap.Type.POSTER) {
                     size = ImageMap.getSize(map.getUserUUID(), map.getId());
                 }
@@ -176,17 +178,19 @@ public class UpdateCommand extends IoMCommand {
                 int height = size[1];
                 try {
                     if (playerSender != null) {
-                        ActionBar.showPermanentMessage(playerSender, Component.text(I.t("Updating...")).color(NamedTextColor.DARK_GREEN));
+                        ActionBar.showPermanentMessage(playerSender,
+                                Component.text(I.t("Updating...")).color(NamedTextColor.DARK_GREEN));
                     }
                     ImageRendererExecutor.update(url1, scaling, uuid, map, width, height)
                             .exceptionally(exception -> {
                                 if (playerSender != null) {
                                     playerSender.sendMessage(
-                                            I.t("{ce}Map rendering failed: {0}", exception.getMessage())
-                                    );
+                                            I.t("{ce}Map rendering failed: {0}", exception.getMessage()));
                                 }
                                 ImageOnMap.get().getLogger()
-                                        .warning("Rendering from " + (playerSender != null ? playerSender.getName() : sender.getName()) + " failed: "
+                                        .warning("Rendering from "
+                                                + (playerSender != null ? playerSender.getName() : sender.getName())
+                                                + " failed: "
                                                 + exception.getClass().getCanonicalName() + ": "
                                                 + exception.getMessage());
                                 return null;
@@ -197,8 +201,7 @@ public class UpdateCommand extends IoMCommand {
                                     playerSender.sendActionBar(Component.text()
                                             .color(NamedTextColor.DARK_GREEN)
                                             .append(Component.text(I.t("The map was updated using the new image!")))
-                                            .build()
-                                    );
+                                            .build());
                                 }
                             });
                 } finally {
@@ -210,7 +213,6 @@ public class UpdateCommand extends IoMCommand {
                 warning(sender, I.t("Invalid URL."));
             }
         });
-
 
     }
 
