@@ -32,8 +32,8 @@ package fr.moribus.imageonmap.i18n;
 
 import dev.tehbrian.imageonmap.ImageOnMap;
 import fr.moribus.imageonmap.i18n.translators.Translator;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import net.kyori.adventure.text.format.NamedTextColor;
 
 import java.io.File;
 import java.text.MessageFormat;
@@ -68,11 +68,11 @@ public class I18n {
     private static final String i18nDirectory = "i18n";
 
     private static final boolean userFriendlyFormatting = true;
-    private static final String errorColor = ChatColor.RED.toString();
-    private static final String noticeColor = ChatColor.WHITE.toString();
-    private static final String successColor = ChatColor.GREEN.toString();
-    private static final String statusColor = ChatColor.GRAY.toString();
-    private static final String commandColor = ChatColor.GOLD.toString();
+    private static final String errorColor = NamedTextColor.RED.toString();
+    private static final String noticeColor = NamedTextColor.WHITE.toString();
+    private static final String successColor = NamedTextColor.GREEN.toString();
+    private static final String statusColor = NamedTextColor.GRAY.toString();
+    private static final String commandColor = NamedTextColor.GOLD.toString();
 
     /**
      * @return The name of the subdirectory where the translations are stored.
@@ -375,30 +375,30 @@ public class I18n {
      * @return The text with formatters replaced.
      */
     private static String replaceFormattingCodes(String text) {
-        return text.replace("{black}", ChatColor.BLACK.toString())
-                .replace("{darkblue}", ChatColor.DARK_BLUE.toString())
-                .replace("{darkgreen}", ChatColor.DARK_GREEN.toString())
-                .replace("{darkaqua}", ChatColor.DARK_AQUA.toString())
-                .replace("{darkred}", ChatColor.DARK_RED.toString())
-                .replace("{darkpurple}", ChatColor.DARK_PURPLE.toString())
-                .replace("{gold}", ChatColor.GOLD.toString())
-                .replace("{gray}", ChatColor.GRAY.toString())
-                .replace("{darkgray}", ChatColor.DARK_GRAY.toString())
-                .replace("{blue}", ChatColor.BLUE.toString())
-                .replace("{green}", ChatColor.GREEN.toString())
-                .replace("{aqua}", ChatColor.AQUA.toString())
-                .replace("{red}", ChatColor.RED.toString())
-                .replace("{lightpurple}", ChatColor.LIGHT_PURPLE.toString())
-                .replace("{yellow}", ChatColor.YELLOW.toString())
-                .replace("{white}", ChatColor.WHITE.toString())
+        return text.replace("{black}", NamedTextColor.BLACK.toString())
+                .replace("{darkblue}", NamedTextColor.DARK_BLUE.toString())
+                .replace("{darkgreen}", NamedTextColor.DARK_GREEN.toString())
+                .replace("{darkaqua}", NamedTextColor.DARK_AQUA.toString())
+                .replace("{darkred}", NamedTextColor.DARK_RED.toString())
+                .replace("{darkpurple}", NamedTextColor.DARK_PURPLE.toString())
+                .replace("{gold}", NamedTextColor.GOLD.toString())
+                .replace("{gray}", NamedTextColor.GRAY.toString())
+                .replace("{darkgray}", NamedTextColor.DARK_GRAY.toString())
+                .replace("{blue}", NamedTextColor.BLUE.toString())
+                .replace("{green}", NamedTextColor.GREEN.toString())
+                .replace("{aqua}", NamedTextColor.AQUA.toString())
+                .replace("{red}", NamedTextColor.RED.toString())
+                .replace("{lightpurple}", NamedTextColor.LIGHT_PURPLE.toString())
+                .replace("{yellow}", NamedTextColor.YELLOW.toString())
+                .replace("{white}", NamedTextColor.WHITE.toString())
 
-                .replace("{bold}", ChatColor.BOLD.toString())
-                .replace("{strikethrough}", ChatColor.STRIKETHROUGH.toString())
-                .replace("{underline}", ChatColor.UNDERLINE.toString())
-                .replace("{italic}", ChatColor.ITALIC.toString())
-                .replace("{obfuscated}", ChatColor.MAGIC.toString())
+                .replace("{bold}", "§l")
+                .replace("{strikethrough}", "§m")
+                .replace("{underline}", "§n")
+                .replace("{italic}", "§o")
+                .replace("{obfuscated}", "§k")
 
-                .replace("{reset}", ChatColor.RESET.toString())
+                .replace("{reset}", "§r")
 
                 .replace("{ce}", errorColor)
                 .replace("{cc}", commandColor)
@@ -432,9 +432,9 @@ public class I18n {
     public static Locale localeFromString(final String localeName) {
         String[] splitLocale = localeName.split("[_\\-]", 2);
         if (splitLocale.length >= 2) {
-            return new Locale(splitLocale[0], splitLocale[1]);
+            return Locale.of(splitLocale[0], splitLocale[1]);
         } else {
-            return new Locale(localeName);
+            return Locale.of(localeName);
         }
     }
 
