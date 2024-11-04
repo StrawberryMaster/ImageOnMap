@@ -50,6 +50,8 @@ import org.bukkit.Bukkit;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
 import java.net.URL;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -65,8 +67,7 @@ public class ImageRendererExecutor {
                     .setDaemon(true)
                     .setNameFormat("Image Renderer - #%d")
                     .setUncaughtExceptionHandler(ExceptionLogger::log)
-                    .build()
-    );
+                    .build());
 
     public static Executor getMainThread() {
         return Bukkit.getScheduler().getMainThreadExecutor(ImageOnMap.get());
@@ -104,14 +105,16 @@ public class ImageRendererExecutor {
         }
     }
 
-    public static CompletableFuture<ImageMap> render(final URL url, final ImageUtils.ScalingType scaling, final UUID playerUUID,
-                                                     final int width, final int height) {
+    public static CompletableFuture<ImageMap> render(final URL url, final ImageUtils.ScalingType scaling,
+            final UUID playerUUID,
+            final int width, final int height) {
         return supply(() -> {
             BufferedImage image = null;
             var strUrl = url.toString();
-            //If the link is an imgur one
+            // If the link is an imgur one
             if (strUrl.toLowerCase().startsWith("https://imgur.com/")) {
-                //Not handled, can't with the hash only access the image in i.imgur.com/<hash>.<extension>
+                // Not handled, can't with the hash only access the image in
+                // i.imgur.com/<hash>.<extension>
                 if (strUrl.contains("gallery/")) {
                     throw new IOException(
                             "We do not support imgur gallery yet, please use direct link to image instead."
@@ -122,11 +125,11 @@ public class ImageRendererExecutor {
                 for (Extension ext : Extension.values()) {
                     var newLink = "https://i.imgur.com/" + strUrl.substring(18) + "." + ext.toString();
 
-                    try (var stream = new URL(newLink).openStream()) {
+                    try (InputStream stream = URI.create(newLink).toURL().openStream()) {
                         image = ImageIO.read(stream);
                     }
 
-                    //valid image
+                    // valid image
                     if (image != null) {
                         break;
                     }
@@ -157,8 +160,9 @@ public class ImageRendererExecutor {
         });
     }
 
-    public static CompletableFuture<ImageMap> update(final URL url, final ImageUtils.ScalingType scaling, final UUID playerUUID,
-                                                     final ImageMap map, final int width, final int height) {
+    public static CompletableFuture<ImageMap> update(final URL url, final ImageUtils.ScalingType scaling,
+            final UUID playerUUID,
+            final ImageMap map, final int width, final int height) {
         return supply(() -> {
             BufferedImage image;
 
@@ -187,7 +191,8 @@ public class ImageRendererExecutor {
         ImageIOExecutor.saveImage(mapsIDs, poster);
 
         if (PluginConfiguration.SAVE_FULL_IMAGE.get()) {
-            ImageIOExecutor.saveImage(ImageMap.getFullImageFile(mapsIDs[0], mapsIDs[mapsIDs.length - 1]), poster.getImage());
+            ImageIOExecutor.saveImage(ImageMap.getFullImageFile(mapsIDs[0], mapsIDs[mapsIDs.length - 1]),
+                    poster.getImage());
         }
 
         getMainThread().execute(() -> Renderer.installRenderer(poster, mapsIDs));
