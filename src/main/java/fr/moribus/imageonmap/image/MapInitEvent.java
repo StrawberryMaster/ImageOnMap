@@ -117,7 +117,12 @@ public class MapInitEvent implements Listener {
     @EventHandler
     public void onPlayerInventoryPlace(InventoryClickEvent event) {
         switch (event.getAction()) {
-            case PLACE_ALL, PLACE_ONE, PLACE_SOME, SWAP_WITH_CURSOR -> initMap(event.getCursor());
+            case PLACE_ALL, PLACE_ONE, PLACE_SOME, SWAP_WITH_CURSOR,
+                    CLONE_STACK, COLLECT_TO_CURSOR, DROP_ALL_CURSOR, DROP_ALL_SLOT,
+                    DROP_ONE_CURSOR, DROP_ONE_SLOT, HOTBAR_SWAP,
+                    MOVE_TO_OTHER_INVENTORY, NOTHING, PICKUP_ALL, PICKUP_HALF,
+                    PICKUP_ONE, PICKUP_SOME, UNKNOWN ->
+                initMap(event.getCursor());
         }
     }
 }

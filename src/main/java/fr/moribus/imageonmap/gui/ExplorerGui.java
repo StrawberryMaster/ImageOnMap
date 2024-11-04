@@ -41,15 +41,20 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-
 /**
  * This class implements an exploration GUI, allowing users to see a set of data
- * in a paginated view, and to manipulate it or get it (if the {@link Mode#CREATIVE creative}
+ * in a paginated view, and to manipulate it or get it (if the
+ * {@link Mode#CREATIVE creative}
  * mode is enabled for this GUI — enabled by default).
- * <p>This GUI supports both one- and two-dimensional contents; two-dimensional content is
- * represented by a one-dimension list and a width, or by {@link #getViewItem(int, int)}
- * if you override it (in this case you need to call {@link #setDataShape(int, int)} in the
- * {@link #onUpdate()} method).</p>
+ * <p>
+ * This GUI supports both one- and two-dimensional contents; two-dimensional
+ * content is
+ * represented by a one-dimension list and a width, or by
+ * {@link #getViewItem(int, int)}
+ * if you override it (in this case you need to call
+ * {@link #setDataShape(int, int)} in the
+ * {@link #onUpdate()} method).
+ * </p>
  *
  * @param <T> The type of data this GUI will display.
  * @author ProkopyL and Amaury Carrade
@@ -139,8 +144,8 @@ public abstract class ExplorerGui<T> extends ActionGui {
                 int maxX = Math.min(viewWidth, dataWidth - startX);
                 int maxY = Math.min(viewHeight, dataHeight - startY);
 
-                for (int i = maxY; i-- > 0; ) {
-                    for (int j = maxX; j-- > 0; ) {
+                for (int i = maxY; i-- > 0;) {
+                    for (int j = maxX; j-- > 0;) {
                         inventory.setItem(i * INVENTORY_ROW_SIZE + j, getViewItem(j + startX, i + startY));
                     }
                 }
@@ -180,7 +185,6 @@ public abstract class ExplorerGui<T> extends ActionGui {
                     case PICKUP_HALF:
                     case PICKUP_ONE:
                     case PICKUP_SOME:
-                    case HOTBAR_MOVE_AND_READD:
                     case HOTBAR_SWAP:
                     case MOVE_TO_OTHER_INVENTORY:
                         onActionPickup(event);
@@ -294,7 +298,7 @@ public abstract class ExplorerGui<T> extends ActionGui {
 
     @Override
     protected void onAfterUpdate() {
-        //Calculating page count
+        // Calculating page count
         if (data != null && data.length == 0) {
             viewWidth = INVENTORY_ROW_SIZE;
             viewHeight = 1;
@@ -443,8 +447,10 @@ public abstract class ExplorerGui<T> extends ActionGui {
     /**
      * Returns the item to use to display the pagination buttons.
      *
-     * @param paginationButtonType The type of button (either "next", "previous", "up", "down").
-     * @param canUse               {@code true} if the button is usable (i.e. not in the last or first page of
+     * @param paginationButtonType The type of button (either "next", "previous",
+     *                             "up", "down").
+     * @param canUse               {@code true} if the button is usable (i.e. not in
+     *                             the last or first page of
      *                             its kind.
      * @return The item.
      */
@@ -488,8 +494,7 @@ public abstract class ExplorerGui<T> extends ActionGui {
         if (canUse) {
             meta.setLore(Collections.singletonList(
                     ChatColor.GRAY + "Go to page " + ChatColor.WHITE + (newPage + 1) + ChatColor.GRAY + " of "
-                            + ChatColor.WHITE + lastPage
-            ));
+                            + ChatColor.WHITE + lastPage));
         }
 
         icon.setItemMeta(meta);
@@ -555,6 +560,7 @@ public abstract class ExplorerGui<T> extends ActionGui {
 
     /**
      * Sets the current page of this Explorer GUI.
+     * 
      * @param currentPageX The page number for the X axis.
      * @param currentPageY The page number for the Y axis.
      */
@@ -593,10 +599,15 @@ public abstract class ExplorerGui<T> extends ActionGui {
     }
 
     /**
-     * If set to {@code true}, the horizontal scrolling line will remain empty even without
-     * scrolls (with one page typically), so you can place buttons or things like that in this
+     * If set to {@code true}, the horizontal scrolling line will remain empty even
+     * without
+     * scrolls (with one page typically), so you can place buttons or things like
+     * that in this
      * area.
-     * <p> Else, with one page, the place will be used to display an additional row of data.</p>
+     * <p>
+     * Else, with one page, the place will be used to display an additional row of
+     * data.
+     * </p>
      *
      * @param keepHorizontalScrollingSpace {@code true} if enabled.
      */
@@ -606,21 +617,27 @@ public abstract class ExplorerGui<T> extends ActionGui {
 
     /**
      * The explorer GUI's reading mode.
-     * <p>In creative mode (the default mode), the players are able to manipulate the content, get it
-     * inside their own inventory (without consumption, just like the creative mode), and whatever
-     * you want if you override some methods.</p>
-     * <p> In read-only mode, they are only able to browse the content.</p>
+     * <p>
+     * In creative mode (the default mode), the players are able to manipulate the
+     * content, get it
+     * inside their own inventory (without consumption, just like the creative
+     * mode), and whatever
+     * you want if you override some methods.
+     * </p>
+     * <p>
+     * In read-only mode, they are only able to browse the content.
+     * </p>
      */
     protected enum Mode {
         READONLY, CREATIVE
     }
 
     private static final class ExplorerGuiEvent {
-        //2D Explorer
+        // 2D Explorer
         public final int dataX;
         public final int dataY;
 
-        //1D Explorer
+        // 1D Explorer
         public final int posData;
 
         public final boolean isValid;
