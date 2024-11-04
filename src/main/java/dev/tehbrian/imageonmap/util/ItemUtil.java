@@ -1,7 +1,6 @@
 package dev.tehbrian.imageonmap.util;
 
 import org.bukkit.GameMode;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -27,7 +26,7 @@ public abstract class ItemUtil {
         }
 
         if (item.getAmount() == 1) {
-            item.setType(Material.AIR);
+            player.getInventory().removeItem(item);
         } else {
             item.setAmount(item.getAmount() - 1);
         }
@@ -44,9 +43,9 @@ public abstract class ItemUtil {
         final Map<Integer, ItemStack> leftovers = player.getInventory().addItem(item);
 
         if (leftovers.isEmpty()) {
-            // TODO: play ITEM_PICKUP sound.
             return true;
         } else {
+            player.playSound(player.getLocation(), org.bukkit.Sound.ENTITY_ITEM_PICKUP, 0.2f, 1.0f);
             // not everything fit.
             ItemStack heldItem = player.getInventory().getItemInMainHand();
             for (ItemStack leftover : leftovers.values()) {
