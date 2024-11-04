@@ -40,11 +40,13 @@ public class MapListGui extends ExplorerGui<ImageMap> {
         } else {
             PosterMap poster = (PosterMap) map;
             if (poster.hasColumnData()) {
-                /// Displayed subtitle description of a poster map on the list GUI (columns × rows in english)
+                /// Displayed subtitle description of a poster map on the list GUI (columns ×
+                /// rows in english)
                 mapDescription = I.tl(getPlayerLocale(), "{white}Poster map ({0} × {1})", poster.getColumnCount(),
                         poster.getRowCount());
             } else {
-                /// Displayed subtitle description of a poster map without column data on the list GUI
+                /// Displayed subtitle description of a poster map without column data on the
+                /// list GUI
                 mapDescription = I.tl(getPlayerLocale(), "{white}Poster map ({0} parts)", poster.getMapCount());
             }
         }
@@ -57,8 +59,7 @@ public class MapListGui extends ExplorerGui<ImageMap> {
                 mapDescription,
                 "",
                 I.tl(getPlayerLocale(), "{gray}Map ID: {0}", map.getId()),
-                ""
-        ));
+                ""));
         if (Permission.GET.grantedTo(getPlayer())) {
             lore.add(I.tl(getPlayerLocale(), "{gray}» {white}Left-click{gray} to get this map"));
         }
@@ -128,7 +129,7 @@ public class MapListGui extends ExplorerGui<ImageMap> {
         ImageMap[] maps = MapManager.getMaps(player.getUniqueId());
         setData(maps);
         /// The maps list GUI title
-        //Equal if the person who send the command is the owner of the mapList
+        // Equal if the person who send the command is the owner of the mapList
         if (player.getUniqueId().equals(getPlayer().getUniqueId())) {
             setTitle(I.tl(getPlayerLocale(), "{black}Your maps {reset}({0})", maps.length));
         } else {
@@ -136,7 +137,6 @@ public class MapListGui extends ExplorerGui<ImageMap> {
         }
 
         setKeepHorizontalScrollingSpace(true);
-
 
         /* ** Statistics ** */
         int mapPartCount = MapManager.getMapPartCount(player.getUniqueId());
@@ -159,12 +159,12 @@ public class MapListGui extends ExplorerGui<ImageMap> {
         }
 
         int imagesCount = MapManager.getMapList(player.getUniqueId()).size();
-        double percentageUsed =
-                mapPartLeft < 0 ? 0 : ((double) mapPartCount) / ((double) (mapPartCount + mapPartLeft)) * 100;
+        double percentageUsed = mapPartLeft < 0 ? 0
+                : ((double) mapPartCount) / ((double) (mapPartCount + mapPartLeft)) * 100;
 
         ItemStack statistics = new ItemStack(Material.ENCHANTED_BOOK);
         ItemMeta meta = statistics.getItemMeta();
-        meta.displayName(Component.text(I.t(getPlayerLocale(), "{blue}Usage statistics")));
+        meta.displayName(Component.text(I.tl(getPlayerLocale(), "{blue}Usage statistics")));
         List<String> lore = new ArrayList<>();
         lore.add("");
         lore.add(I.tn(getPlayerLocale(),
@@ -174,13 +174,13 @@ public class MapListGui extends ExplorerGui<ImageMap> {
 
         if (mapPartLeft >= 0) {
             lore.add("");
-            lore.add(I.t(getPlayerLocale(), "{blue}Minecraft maps limits"));
+            lore.add(I.tl(getPlayerLocale(), "{blue}Minecraft maps limits"));
             lore.add("");
             lore.add(mapGlobalLimit == 0
-                    ? I.t(getPlayerLocale(), "{gray}Server-wide limit: {white}unlimited")
-                    : I.t(getPlayerLocale(), "{gray}Server-wide limit: {white}{0}", mapGlobalLimit));
+                    ? I.tl(getPlayerLocale(), "{gray}Server-wide limit: {white}unlimited")
+                    : I.tl(getPlayerLocale(), "{gray}Server-wide limit: {white}{0}", mapGlobalLimit));
             lore.add("");
-            lore.add(I.t(getPlayerLocale(), "{white}{0} %{gray} of your quota used",
+            lore.add(I.tl(getPlayerLocale(), "{white}{0} %{gray} of your quota used",
                     (int) Math.rint(percentageUsed)));
             lore.add(I.tn(getPlayerLocale(), "{white}{0}{gray} map left", "{white}{0}{gray} maps left",
                     mapPartLeft));
