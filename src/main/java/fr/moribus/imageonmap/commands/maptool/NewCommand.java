@@ -53,6 +53,7 @@ import org.bukkit.entity.Player;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URI;
 
 @CommandInfo(name = "new", usageParameters = "<URL> [resize]")
 public class NewCommand extends IoMCommand {
@@ -82,7 +83,7 @@ public class NewCommand extends IoMCommand {
         }
 
         try {
-            url = new URL(args[0]);
+            url = URI.create(args[0]).toURL();
         } catch (MalformedURLException ex) {
             throwInvalidArgument(I.t("Invalid URL."));
             return;
@@ -96,7 +97,8 @@ public class NewCommand extends IoMCommand {
             scaling = resizeMode();
         }
         try {
-            ActionBar.showPermanentMessage(player, Component.text(I.t("Rendering...")).color(NamedTextColor.DARK_GREEN));
+            ActionBar.showPermanentMessage(player,
+                    Component.text(I.t("Rendering...")).color(NamedTextColor.DARK_GREEN));
             ImageRendererExecutor.render(url, scaling, player.getUniqueId(), width, height)
                     .exceptionallyAsync((exception) -> {
                         player.sendMessage(I.t("{ce}Map rendering failed: {0}", exception.getMessage()));
@@ -109,8 +111,7 @@ public class NewCommand extends IoMCommand {
                         player.sendActionBar(Component.text()
                                 .color(NamedTextColor.DARK_GREEN)
                                 .append(Component.text(I.t("Rendering finished!")))
-                                .build()
-                        );
+                                .build());
 
                         if (result.give(player)
                                 && (result instanceof PosterMap && !((PosterMap) result).hasColumnData())) {

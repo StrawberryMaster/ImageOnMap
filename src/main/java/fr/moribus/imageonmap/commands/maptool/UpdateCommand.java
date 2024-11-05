@@ -100,7 +100,7 @@ public class UpdateCommand extends IoMCommand {
 
         if (arguments.size() == 2) {
             resize = "";
-            playerName = playerSender.getName();
+            playerName = (playerSender != null) ? playerSender.getName() : "";
             mapName = arguments.get(0);
             url = arguments.get(1);
         } else {

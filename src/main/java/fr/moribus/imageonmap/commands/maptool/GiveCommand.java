@@ -49,7 +49,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-
 @CommandInfo(name = "give", usageParameters = "<player name> [playerFrom]:<map name>")
 public class GiveCommand extends IoMCommand {
 
@@ -87,7 +86,7 @@ public class GiveCommand extends IoMCommand {
         }
         playerSender = playerSender1;
         if (arguments.size() == 2) {
-            from = playerSender.getName();
+            from = (playerSender != null) ? playerSender.getName() : "";
             playerName = arguments.get(0);
             mapName = arguments.get(1);
         } else {
