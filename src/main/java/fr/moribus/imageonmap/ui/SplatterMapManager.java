@@ -135,7 +135,8 @@ public abstract class SplatterMapManager {
 
         meta.getPersistentDataContainer().set(SPLATTER_KEY, PersistentDataType.BYTE, (byte) 1);
 
-        meta.addEnchant(Enchantment.UNBREAKING, 1, false);
+        meta.addEnchant(Enchantment.MENDING, 1, true);
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         itemStack.setItemMeta(meta);
 
