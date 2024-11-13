@@ -1,11 +1,14 @@
 # ImageOnMap
+[![Java 21+](https://img.shields.io/badge/Java-21%2B-orange)](https://adoptium.net)
+[![Paper Only](https://img.shields.io/badge/Server-Paper-blue)](https://papermc.io)
+[![Latest Release](https://img.shields.io/github/v/release/username/ImageOnMap)](https://github.com/username/ImageOnMap/releases)
 
 This repository is a fork of [a fork](https://github.com/TehBrian/ImageOnMap) of [a fork](https://github.com/okocraft/ImageOnMap) of [ImageOnMap](https://github.com/zDevelopers/ImageOnMap).
 
 The rationale for this fork (alongside most of the others, I assume) is the amount of server errors 
 popping up left and right due to changes in the MC codebase over the years. In one specific server I contribute in, which also has the excellent [ImageFrame](https://github.com/LOOHP/ImageFrame), converting the mods to IF has unfortunately resulted in some issues — leaving it stuck in 1.20.1 — and I was voluntarily commissioned to make this fork work for 1.21. *Et voilà...*
 
-Contributions are welcome! In theory this works, but still needs some more testing.
+Contributions are welcome! This fork is compatible with Java 1.21 (the Tricky Trials update) & its bugfix updates.
 
 Below are the README from all the other forks this derived frm.
 
