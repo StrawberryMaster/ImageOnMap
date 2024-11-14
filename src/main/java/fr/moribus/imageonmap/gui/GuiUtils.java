@@ -43,7 +43,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-
 /**
  * Various utility methods for GUIs.
  */
@@ -104,7 +103,9 @@ public final class GuiUtils {
 
     /**
      * One-liner to update an {@link ItemStack}'s {@link ItemMeta}.
-     * <p>If the stack is a map, it's attributes will be hidden.</p>
+     * <p>
+     * If the stack is a map, it's attributes will be hidden.
+     * </p>
      *
      * @param itemStack The original {@link ItemStack}. This stack will be
      *                  directly modified.
@@ -127,7 +128,6 @@ public final class GuiUtils {
         itemStack.setItemMeta(meta);
         return itemStack;
     }
-
 
     /**
      * Generates a lore list based on the given text, cutting it into lines of
