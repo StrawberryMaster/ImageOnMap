@@ -407,7 +407,7 @@ public abstract class ExplorerGui<T> extends ActionGui {
      */
     protected ItemStack getEmptyViewItem() {
         return GuiUtils
-                .makeItem(Material.BARRIER, ChatColor.RED + "Empty", ChatColor.GRAY + "There's nothing to see here");
+                .makeItem(Material.BARRIER, "§cEmpty", "§7There's nothing to see here");
     }
 
     private ItemStack getPickedUpItem(ExplorerGuiEvent event) {
