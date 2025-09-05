@@ -43,7 +43,7 @@ jobs:
       - name: Publish to GitHub Packages (Maven)
         run: |
           mvn -B -DskipTests \
-            -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/${{ github.repository }} \
+            -DaltDeploymentRepository=github::https://maven.pkg.github.com/${{ github.repository }} \
             deploy
 
       - name: Create GitHub Release and upload JAR
